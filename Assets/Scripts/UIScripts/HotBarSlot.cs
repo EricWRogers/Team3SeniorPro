@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HotBarSlot : MonoBehaviour
 {
-    public int iteamId;
+    public int itemId;
     public bool isSelected;
     public Color selectedColor;
     public Color unselectedColor;

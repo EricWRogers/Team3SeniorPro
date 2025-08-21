@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Mouse Settings")]
     public float mouseSensitivity = 1f;
     private float xRotation = 0f;
+    private float yRotation = 0f;
     public bool lockedCursor = true;
 
     [Header("Player Settings")]
@@ -64,10 +65,11 @@ public class PlayerMovement : MonoBehaviour
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity; 
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-
+        
+        yRotation += mouseX;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
 
         player.transform.Rotate(Vector3.up * mouseX);
 

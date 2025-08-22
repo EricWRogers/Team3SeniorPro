@@ -41,13 +41,13 @@ public class PlayerInteract : MonoBehaviour
 
     }
 
-    void LockCursor()
+    public void LockCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         playerMovement.lockedCursor = true;
     }
-    void UnlockCursor()
+    public void UnlockCursor()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

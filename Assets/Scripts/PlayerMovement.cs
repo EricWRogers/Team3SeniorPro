@@ -32,48 +32,52 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.W))
-        {
-            rb.AddForce(transform.forward * speed);
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce(-transform.forward * speed);
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(-transform.right * speed);
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(transform.right * speed);
-        }
-        if(Input.GetKey(KeyCode.Space))
-        {
-            rb.AddForce(transform.up * speed);
-        }
-        if(Input.GetKey(KeyCode.LeftControl))
-        {
-            rb.AddForce(-transform.up * speed);
-        }
+        if(lockedCursor){
+             if(Input.GetKey(KeyCode.W))
+             {
+                 rb.AddForce(transform.forward * speed);
+             }
+             if(Input.GetKey(KeyCode.S))
+             {
+                 rb.AddForce(-transform.forward * speed);
+             }
+             if(Input.GetKey(KeyCode.A))
+             {
+                 rb.AddForce(-transform.right * speed);
+             }
+             if(Input.GetKey(KeyCode.D))
+             {
+                 rb.AddForce(transform.right * speed);
+             }
+             if(Input.GetKey(KeyCode.Space))
+             {
+                 rb.AddForce(transform.up * speed);
+             }
+             if(Input.GetKey(KeyCode.LeftControl))
+             {
+                 rb.AddForce(-transform.up * speed);
+             }
 
 
 
-        if(rb.linearVelocity.magnitude > 0.001f)
-        {
-            rb.linearVelocity -= rb.linearVelocity * friction; // Apply Friction
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed); // Limit speed
-        }
+             if(rb.linearVelocity.magnitude > 0.001f)
+             {
+                 rb.linearVelocity -= rb.linearVelocity * friction; // Apply Friction
+                 rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed); // Limit speed
+             }
 
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity; 
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-        
-        yRotation += mouseX;
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity; 
+             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+             yRotation += mouseX;
+             xRotation -= mouseY;
+             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+             transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
 
        
-
+        }
+        else{
+            rb.linearVelocity = Vector3.zero; // Stop movement when cursor is not locked
+        }
     }
 }

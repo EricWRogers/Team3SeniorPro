@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Raw Meat
   description: A hunk of raw meat from alien lifeform. Probably best to cook it before
     eating.
-  Image: {fileID: 0}
+  image: {fileID: 0}
   maxStack: 20
-  iteamPrefab: {fileID: 0}
+  itemPrefab: {fileID: 2899418314725480978, guid: a1acd352995793e48b792dfb5ff6c990, type: 3}

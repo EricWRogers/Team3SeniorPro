@@ -22,6 +22,20 @@ public class InventorySlot
         ClearSlot();
     }
 
+    public void AssignItem(InventorySlot _invSlot)
+    {
+        if (itemData == _invSlot.itemData)
+        {
+            AddToStack(_invSlot.stackSize);
+        }
+        else
+        {
+            m_itemData = _invSlot.itemData;
+            m_stackSize = 0;
+            AddToStack(_invSlot.stackSize);
+        }
+    }
+
     public void ClearSlot()
     {
         m_itemData = null;

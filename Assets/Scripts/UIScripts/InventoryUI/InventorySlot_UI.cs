@@ -34,7 +34,7 @@ public class InventorySlot_UI : MonoBehaviour
     {
         if (_slot.itemData != null)
         {
-            m_itemSprite.sprite = _slot.itemData.Image;
+            m_itemSprite.sprite = _slot.itemData.image;
             m_itemSprite.color = Color.white;
         }
         else

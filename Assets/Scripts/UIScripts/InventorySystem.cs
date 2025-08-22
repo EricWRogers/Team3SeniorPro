@@ -55,13 +55,15 @@ public class InventorySystem
         _invSlot = inventorySlots.Where(i => i.itemData == _itemToAdd).ToList();
 
         return _invSlot == null ? false : true;
-        
+
     }
 
     public bool HasFreeSlot(out InventorySlot _freeSlot)//check for free slot
     {
         _freeSlot = inventorySlots.FirstOrDefault(i => i.itemData == null);
         return _freeSlot == null ? false : true;
-        
+
     }
+
+    
 }

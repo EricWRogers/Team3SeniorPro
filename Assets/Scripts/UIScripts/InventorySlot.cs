@@ -69,4 +69,19 @@ public class InventorySlot
     {
         m_stackSize -= _amount;
     }
+
+    public bool SplitStack(out InventorySlot _splitStack)
+    {
+        if (stackSize <= 1)
+        {
+            _splitStack = null;
+            return false;
+        }
+
+        int halfStack = Mathf.RoundToInt(stackSize / 2);
+        RemoveFromStack(halfStack);
+
+        _splitStack = new InventorySlot(itemData, halfStack);
+        return true;
+    }
 }

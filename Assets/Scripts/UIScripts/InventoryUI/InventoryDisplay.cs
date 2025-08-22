@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 
 public abstract class InventoryDisplay : MonoBehaviour
@@ -34,11 +35,24 @@ public abstract class InventoryDisplay : MonoBehaviour
 
     public void SlotClicked(InventorySlot_UI _clickedUISlot)
     {
-        if (_clickedUISlot.assignedInvSlot.itemData != null && mouseInventoryItem.assignedInventorySlot.itemData == null)//pick up item in inventory
+        bool isAltPressed = Keyboard.current.leftAltKey.isPressed;
+
+        
+
+        if (_clickedUISlot.assignedInvSlot.itemData != null && mouseInventoryItem.assignedInventorySlot.itemData == null)
         {
-            mouseInventoryItem.UpdateMouseSlot(_clickedUISlot.assignedInvSlot);
-            _clickedUISlot.ClearSlot();
-            return;
+            if (isAltPressed && _clickedUISlot.assignedInvSlot.SplitStack(out InventorySlot halfStackSlot))//split stack
+            {
+                mouseInventoryItem.UpdateMouseSlot(halfStackSlot);
+                _clickedUISlot.UpdateUISlot();
+                return;
+            }
+            else
+            {
+                mouseInventoryItem.UpdateMouseSlot(_clickedUISlot.assignedInvSlot);//pick up item in inventory
+                _clickedUISlot.ClearSlot();
+                return;
+            }
         }
 
         if (_clickedUISlot.assignedInvSlot.itemData == null && mouseInventoryItem.assignedInventorySlot.itemData != null)//Place item in empty slot
@@ -47,6 +61,7 @@ public abstract class InventoryDisplay : MonoBehaviour
             _clickedUISlot.UpdateUISlot();
 
             mouseInventoryItem.ClearSlot();
+            return;
         }
 
         if (_clickedUISlot.assignedInvSlot.itemData != null && mouseInventoryItem.assignedInventorySlot.itemData != null)//both slots have an item
@@ -59,6 +74,7 @@ public abstract class InventoryDisplay : MonoBehaviour
                 _clickedUISlot.assignedInvSlot.AssignItem(mouseInventoryItem.assignedInventorySlot);
                 _clickedUISlot.UpdateUISlot();
                 mouseInventoryItem.ClearSlot();
+                return;
             }
             else if (isSameItem && !_clickedUISlot.assignedInvSlot.RoomLeftInStack(mouseInventoryItem.assignedInventorySlot.stackSize, out int leftInStack))
             {
@@ -75,11 +91,13 @@ public abstract class InventoryDisplay : MonoBehaviour
                     var newItem = new InventorySlot(mouseInventoryItem.assignedInventorySlot.itemData, remainingOnMouse);
                     mouseInventoryItem.ClearSlot();
                     mouseInventoryItem.UpdateMouseSlot(newItem);
+                    return;
                 }
             }
             else if (!isSameItem)// items are different so they swap
             {
                 SwapSlots(_clickedUISlot);
+                return;
             }
         }
     }

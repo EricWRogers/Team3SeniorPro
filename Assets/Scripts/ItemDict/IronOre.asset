@@ -16,6 +16,6 @@ MonoBehaviour:
   displayName: Iron Ore
   description: A piece of iron found in an astroid. Can be used to craft and also
     be melted down for a better resource.
-  Image: {fileID: 0}
+  image: {fileID: 0}
   maxStack: 20
-  iteamPrefab: {fileID: 0}
+  itemPrefab: {fileID: 8012207121107059388, guid: 8b549330c366f474eb9c3d527cf4216a, type: 3}

@@ -16,7 +16,7 @@ public abstract class InventoryDisplay : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+
     }
 
     protected virtual void UpdateSlot(InventorySlot _updatedSlot)
@@ -30,13 +30,69 @@ public abstract class InventoryDisplay : MonoBehaviour
         }
     }
 
+
+
     public void SlotClicked(InventorySlot_UI _clickedUISlot)
     {
-        if (_clickedUISlot.assignedInvSlot.itemData != null && mouseInventoryItem.assignedInventorySlot.itemData == null)
+        if (_clickedUISlot.assignedInvSlot.itemData != null && mouseInventoryItem.assignedInventorySlot.itemData == null)//pick up item in inventory
         {
             mouseInventoryItem.UpdateMouseSlot(_clickedUISlot.assignedInvSlot);
             _clickedUISlot.ClearSlot();
             return;
         }
+
+        if (_clickedUISlot.assignedInvSlot.itemData == null && mouseInventoryItem.assignedInventorySlot.itemData != null)//Place item in empty slot
+        {
+            _clickedUISlot.assignedInvSlot.AssignItem(mouseInventoryItem.assignedInventorySlot);
+            _clickedUISlot.UpdateUISlot();
+
+            mouseInventoryItem.ClearSlot();
+        }
+
+        if (_clickedUISlot.assignedInvSlot.itemData != null && mouseInventoryItem.assignedInventorySlot.itemData != null)//both slots have an item
+        {
+            bool isSameItem = _clickedUISlot.assignedInvSlot.itemData == mouseInventoryItem.assignedInventorySlot.itemData;
+
+            //items are the same and has room so to combine
+            if (isSameItem && _clickedUISlot.assignedInvSlot.RoomLeftInStack(mouseInventoryItem.assignedInventorySlot.stackSize))
+            {
+                _clickedUISlot.assignedInvSlot.AssignItem(mouseInventoryItem.assignedInventorySlot);
+                _clickedUISlot.UpdateUISlot();
+                mouseInventoryItem.ClearSlot();
+            }
+            else if (isSameItem && !_clickedUISlot.assignedInvSlot.RoomLeftInStack(mouseInventoryItem.assignedInventorySlot.stackSize, out int leftInStack))
+            {
+                if (leftInStack < 1)//stack is full so swap 
+                {
+                    SwapSlots(_clickedUISlot);
+                }
+                else//slot has room so take what is need to fill stack and leave the rest
+                {
+                    int remainingOnMouse = mouseInventoryItem.assignedInventorySlot.stackSize - leftInStack;
+                    _clickedUISlot.assignedInvSlot.AddToStack(leftInStack);
+                    _clickedUISlot.UpdateUISlot();
+
+                    var newItem = new InventorySlot(mouseInventoryItem.assignedInventorySlot.itemData, remainingOnMouse);
+                    mouseInventoryItem.ClearSlot();
+                    mouseInventoryItem.UpdateMouseSlot(newItem);
+                }
+            }
+            else if (!isSameItem)// items are different so they swap
+            {
+                SwapSlots(_clickedUISlot);
+            }
+        }
+    }
+
+    private void SwapSlots(InventorySlot_UI _clickedSlot)
+    {
+        var clonedSlot = new InventorySlot(mouseInventoryItem.assignedInventorySlot.itemData, mouseInventoryItem.assignedInventorySlot.stackSize);
+        mouseInventoryItem.ClearSlot();
+
+        mouseInventoryItem.UpdateMouseSlot(_clickedSlot.assignedInvSlot);
+
+        _clickedSlot.ClearSlot();
+        _clickedSlot.assignedInvSlot.AssignItem(clonedSlot);
+        _clickedSlot.UpdateUISlot();
     }
 }

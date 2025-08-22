@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Workstation
+  - Interactable
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,7 @@ public class PlayerInteract : MonoBehaviour
 
     public bool canInteract = false;
     public Transform startPos;
+    public InventoryHolder inventoryHolder;
     void Start()
     {
         
@@ -33,6 +34,7 @@ public class PlayerInteract : MonoBehaviour
         if (canInteract && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Interacted with: " + hit.collider.name);
+            hit.collider.GetComponent<ItemPickUp>().Interact(inventoryHolder);
 
         }
 

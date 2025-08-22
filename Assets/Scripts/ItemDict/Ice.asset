@@ -17,5 +17,5 @@ MonoBehaviour:
   description: Chunk of ice from an astroid needs to be melted and purified before
     consumed.
   Image: {fileID: 0}
-  maxStack: 20
-  iteamPrefab: {fileID: 0}
+  maxStack: 3
+  itemPrefab: {fileID: 0}

@@ -45,7 +45,7 @@ public class PlayerInteract : MonoBehaviour
         {
             Debug.Log("Interacted with: " + hit.collider.name);
             hit.collider.GetComponent<ItemPickUp>().Interact(inventoryHolder);
-
+            
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))

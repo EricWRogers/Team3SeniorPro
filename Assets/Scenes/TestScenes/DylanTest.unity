@@ -429,6 +429,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2118485297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118485287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47c30bbd8fe2a0be6bf60a4f9df39f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &864080761639405437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -447,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4578405244457767980, guid: 30aae601eb6d14e95a836e61fb768292, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.938427
+      value: 6.48
       objectReference: {fileID: 0}
     - target: {fileID: 4578405244457767980, guid: 30aae601eb6d14e95a836e61fb768292, type: 3}
       propertyPath: m_LocalPosition.y
@@ -492,6 +504,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2577717133516980202, guid: 30aae601eb6d14e95a836e61fb768292, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2118485292}
+    - targetCorrespondingSourceObject: {fileID: 2577717133516980202, guid: 30aae601eb6d14e95a836e61fb768292, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2118485297}
   m_SourcePrefab: {fileID: 100100000, guid: 30aae601eb6d14e95a836e61fb768292, type: 3}
 --- !u!1001 &2036102404894873600
 PrefabInstance:
@@ -501,6 +516,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 671346853922878432, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+      propertyPath: ToggleCursor.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 671346853922878432, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+      propertyPath: ToggleCursor.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 671346853922878432, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+      propertyPath: ToggleCursor.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7136019664139664298, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

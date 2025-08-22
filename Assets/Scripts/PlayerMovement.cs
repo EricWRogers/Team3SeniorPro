@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         if(lockedCursor){
+            rb.isKinematic = false;
              if(Input.GetKey(KeyCode.W))
              {
                  rb.AddForce(transform.forward * speed);
@@ -81,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else{
             rb.linearVelocity = Vector3.zero; // Stop movement when cursor is not locked
+            rb.isKinematic = true; // Disable physics when cursor is not locked
         }
     }
 }

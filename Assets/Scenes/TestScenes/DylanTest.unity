@@ -462,6 +462,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5537062579084283251, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+      propertyPath: friction
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 7136019664139664298, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

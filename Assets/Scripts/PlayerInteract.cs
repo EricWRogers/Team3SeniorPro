@@ -66,7 +66,7 @@ public class PlayerInteract : MonoBehaviour
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
-            playerMovement.lockedCursor = false;
+            playerMovement.lockedCursor = true;
         }
     }
 

@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 7
   displayName: Iron Bar
   description: Bar of pure iron useful for more advanced crafting.
-  Image: {fileID: 0}
+  image: {fileID: 0}
   maxStack: 20
-  iteamPrefab: {fileID: 0}
+  itemPrefab: {fileID: 0}

@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseInventoryItem: {fileID: 1884277510}
-  m_inventoryHolder: {fileID: 1759603647}
+  m_inventoryHolder: {fileID: 1759603654}
   m_slots:
   - {fileID: 8773249821681169145}
   - {fileID: 1195039693}
@@ -1791,9 +1791,9 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1759603647 stripped
+--- !u!114 &1759603654 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4611911417553055267, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3486765195435046387, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
   m_PrefabInstance: {fileID: 897276212}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

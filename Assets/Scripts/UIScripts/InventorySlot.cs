@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventorySlot
 {
+    //this is the logic behind each inventory slot
     [SerializeField] private ItemData m_itemData;
     [SerializeField] private int m_stackSize;
 
@@ -27,14 +28,20 @@ public class InventorySlot
         m_stackSize = -1;
     }
 
+    public void UpdateInventorySlot(ItemData _itemData, int _amount)
+    {
+        m_itemData = _itemData;
+        m_stackSize = _amount;
+    }
+
     public bool RoomLeftInStack(int _amountToAdd, out int _amountRemaining)
     {
         _amountRemaining = m_itemData.maxStack - m_stackSize;
 
-        return RoomLeftInStackCheck(_amountToAdd);
+        return RoomLeftInStack(_amountToAdd);
     }
 
-    public bool RoomLeftInStackCheck(int _amountToAdd)
+    public bool RoomLeftInStack(int _amountToAdd)
     {
         if (m_stackSize + _amountToAdd <= m_itemData.maxStack) return true;
         else return false;

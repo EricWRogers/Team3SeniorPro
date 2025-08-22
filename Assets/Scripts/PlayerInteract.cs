@@ -7,9 +7,10 @@ public class PlayerInteract : MonoBehaviour
     public bool canInteract = false;
     public Transform startPos;
     public InventoryHolder inventoryHolder;
+    private PlayerMovement playerMovement;
     void Start()
     {
-        
+        gameObject.TryGetComponent<PlayerMovement>(out playerMovement);
     }
 
     // Update is called once per frame
@@ -38,6 +39,19 @@ public class PlayerInteract : MonoBehaviour
 
         }
 
+    }
+
+    void LockCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        playerMovement.lockedCursor = true;
+    }
+    void UnlockCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        playerMovement.lockedCursor = false;
     }
 
 

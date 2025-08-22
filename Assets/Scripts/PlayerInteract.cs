@@ -1,9 +1,13 @@
 using System;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerInteract : MonoBehaviour
 {
 
+    public UnityEvent ToggleCursor;
     public bool canInteract = false;
     public Transform startPos;
     public InventoryHolder inventoryHolder;
@@ -11,6 +15,11 @@ public class PlayerInteract : MonoBehaviour
     void Start()
     {
         gameObject.TryGetComponent<PlayerMovement>(out playerMovement);
+        if(ToggleCursor == null)
+        {
+            ToggleCursor = new UnityEvent();
+        }
+        ToggleCursor.AddListener(ChangeCursor);
     }
 
     // Update is called once per frame
@@ -39,19 +48,26 @@ public class PlayerInteract : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleCursor.Invoke();
+        }
+
     }
 
-    public void LockCursor()
+    private void ChangeCursor()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        playerMovement.lockedCursor = true;
-    }
-    public void UnlockCursor()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-        playerMovement.lockedCursor = false;
+        Cursor.visible = !Cursor.visible;
+        if (Cursor.visible)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            playerMovement.lockedCursor = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            playerMovement.lockedCursor = false;
+        }
     }
 
 

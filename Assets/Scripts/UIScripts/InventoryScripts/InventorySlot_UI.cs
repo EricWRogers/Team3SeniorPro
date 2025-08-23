@@ -7,11 +7,11 @@ public class InventorySlot_UI : MonoBehaviour
 {
     [SerializeField] private Image m_itemSprite;
     [SerializeField] private TextMeshProUGUI m_itemCount;
-    [SerializeField] private InventorySlot m_assignedInvSlot;
+    [SerializeField] private InventorySlot assignedInvSlot;
 
     private Button m_button;
 
-    public InventorySlot assignedInvSlot => m_assignedInvSlot;
+    public InventorySlot AssignedInvSlot => assignedInvSlot;
     public InventoryDisplay parentDisplay { get; private set; }
 
     void Awake()
@@ -26,24 +26,24 @@ public class InventorySlot_UI : MonoBehaviour
 
     public void Init(InventorySlot _slot)
     {
-        m_assignedInvSlot = _slot;
+        assignedInvSlot = _slot;
         UpdateUISlot(_slot);
     }
 
     public void UpdateUISlot(InventorySlot _slot)
     {
-        if (_slot.itemData != null)
+        if (_slot.ItemData != null)
         {
-            m_itemSprite.sprite = _slot.itemData.image;
+            m_itemSprite.sprite = _slot.ItemData.image;
             m_itemSprite.color = Color.white;
         }
         else
         {
             ClearSlot();
         }
-        if (_slot.stackSize > 1)
+        if (_slot.StackSize > 1)
         {
-            m_itemCount.text = _slot.stackSize.ToString();
+            m_itemCount.text = _slot.StackSize.ToString();
         }
         else
         {
@@ -53,15 +53,15 @@ public class InventorySlot_UI : MonoBehaviour
 
     public void UpdateUISlot()
     {
-        if (m_assignedInvSlot != null)
+        if (assignedInvSlot != null)
         {
-            UpdateUISlot(m_assignedInvSlot);
+            UpdateUISlot(assignedInvSlot);
         }
     }
 
     public void ClearSlot()
     {
-        m_assignedInvSlot?.ClearSlot();
+        assignedInvSlot?.ClearSlot();
         m_itemSprite.sprite = null;
         m_itemSprite.color = Color.clear;
         m_itemCount.text = "";

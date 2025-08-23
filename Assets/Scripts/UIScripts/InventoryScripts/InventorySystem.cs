@@ -8,20 +8,20 @@ using System.Linq;
 public class InventorySystem
 {
     //This script manages the inventory logic
-    [SerializeField] private List<InventorySlot> m_inventorySlots;
+    [SerializeField] private List<InventorySlot> inventorySlots;
 
-    public List<InventorySlot> inventorySlots => m_inventorySlots;
-    public int inventorySize => inventorySlots.Count;
+    public List<InventorySlot> InventorySlots => inventorySlots;
+    public int inventorySize => InventorySlots.Count;
 
     public UnityAction<InventorySlot> OnInventorySlotChanged;
 
     public InventorySystem(int _size) // creates the slots for inventory
     {
-        m_inventorySlots = new List<InventorySlot>(_size);
+        inventorySlots = new List<InventorySlot>(_size);
 
         for (int x = 0; x < _size; x++)
         {
-            m_inventorySlots.Add(new InventorySlot());
+            inventorySlots.Add(new InventorySlot());
         }
     }
 
@@ -52,7 +52,7 @@ public class InventorySystem
 
     public bool ContainsItem(ItemData _itemToAdd, out List<InventorySlot> _invSlot)//check for same item
     {
-        _invSlot = inventorySlots.Where(i => i.itemData == _itemToAdd).ToList();
+        _invSlot = InventorySlots.Where(i => i.ItemData == _itemToAdd).ToList();
 
         return _invSlot == null ? false : true;
 
@@ -60,7 +60,7 @@ public class InventorySystem
 
     public bool HasFreeSlot(out InventorySlot _freeSlot)//check for free slot
     {
-        _freeSlot = inventorySlots.FirstOrDefault(i => i.itemData == null);
+        _freeSlot = InventorySlots.FirstOrDefault(i => i.ItemData == null);
         return _freeSlot == null ? false : true;
 
     }

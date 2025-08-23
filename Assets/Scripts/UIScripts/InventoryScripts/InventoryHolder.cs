@@ -6,15 +6,15 @@ public class InventoryHolder : MonoBehaviour
 {
     //this script creates inventory 
     [SerializeField] private int m_inventorySize;
-    [SerializeField] protected InventorySystem m_inventorySystem;
+    [SerializeField] protected InventorySystem inventorySystem;
 
-    public InventorySystem inventorySystem => m_inventorySystem;
+    public InventorySystem InventorySystem => inventorySystem;
 
     public static UnityAction<InventorySystem> OnDynamicInventoryDisplayRequested;
 
     private void Awake()
     {
-        m_inventorySystem = new InventorySystem(m_inventorySize);
+        inventorySystem = new InventorySystem(m_inventorySize);
     }
 
 }

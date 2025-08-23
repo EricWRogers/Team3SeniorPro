@@ -20,14 +20,14 @@ public class MouseItemData : MonoBehaviour
     public void UpdateMouseSlot(InventorySlot _invSlot)
     {
         assignedInventorySlot.AssignItem(_invSlot);
-        itemSprite.sprite = _invSlot.itemData.image;
-        itemCount.text = _invSlot.stackSize.ToString();
+        itemSprite.sprite = _invSlot.ItemData.image;
+        itemCount.text = _invSlot.StackSize.ToString();
         itemSprite.color = Color.white;
     }
 
     void Update()
     {
-        if (assignedInventorySlot.itemData != null)
+        if (assignedInventorySlot.ItemData != null)
         {
             transform.position = Mouse.current.position.ReadValue();
 
@@ -44,14 +44,14 @@ public class MouseItemData : MonoBehaviour
     {
         if (_slotToDrop != null)
         {
-            if (_slotToDrop.stackSize > 1)
+            if (_slotToDrop.StackSize > 1)
             {
-                Instantiate(_slotToDrop.itemData.itemPrefab, new Vector3(player.position.x, player.position.y - 1, player.position.z), Quaternion.identity);
+                Instantiate(_slotToDrop.ItemData.itemPrefab, new Vector3(player.position.x, player.position.y - 1, player.position.z), Quaternion.identity);
                 _slotToDrop.RemoveFromStack(1);
             }
             else
             {
-                Instantiate(_slotToDrop.itemData.itemPrefab, new Vector3(player.position.x, player.position.y - 1, player.position.z), Quaternion.identity);
+                Instantiate(_slotToDrop.ItemData.itemPrefab, new Vector3(player.position.x, player.position.y - 1, player.position.z), Quaternion.identity);
                 ClearSlot();
             }
             

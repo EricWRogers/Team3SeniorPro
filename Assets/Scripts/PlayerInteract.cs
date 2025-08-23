@@ -8,7 +8,8 @@ public class PlayerInteract : MonoBehaviour
 {
 
     public UnityEvent ToggleCursor;
-    public bool canInteract = false;
+    public bool lookingAtItem = false;
+    public bool lookingAtInteractable = false;
     public Transform startPos;
     public InventoryHolder inventoryHolder;
     private PlayerMovement playerMovement;
@@ -29,23 +30,38 @@ public class PlayerInteract : MonoBehaviour
         {
             if (hit.collider.CompareTag("Interactable"))
             {
-                canInteract = true;
+                lookingAtInteractable = true;
             }
             else
             {
-                canInteract = false;
+                lookingAtInteractable = false;
+            }
+
+            if (hit.collider.CompareTag("Item"))
+            {
+                lookingAtItem = true;
+            }
+            else
+            {
+                lookingAtItem = false;
             }
         }
         else
         {
-            canInteract = false;
+            lookingAtInteractable = false;
+            lookingAtItem = false;
         }
 
-        if (canInteract && Input.GetKeyDown(KeyCode.E))
+        if (lookingAtItem && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Interacted with: " + hit.collider.name);
             hit.collider.GetComponent<ItemPickUp>().Interact(inventoryHolder);
             
+        }
+        if (lookingAtInteractable && Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Interacted with: " + hit.collider.name);
+            hit.collider.GetComponent<InteractionScript>().Interacted.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -55,7 +71,7 @@ public class PlayerInteract : MonoBehaviour
 
     }
 
-    private void ChangeCursor()
+    public void ChangeCursor()
     {
         Cursor.visible = !Cursor.visible;
         if (Cursor.visible)
@@ -73,7 +89,9 @@ public class PlayerInteract : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = canInteract ? Color.green : Color.red;
+        if (lookingAtItem)Gizmos.color = Color.green;
+        else if (lookingAtInteractable) Gizmos.color = Color.blue;
+        else Gizmos.color = Color.red;
         Gizmos.DrawRay(startPos.position, startPos.forward * 2f);
     }
 }

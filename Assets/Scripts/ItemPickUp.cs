@@ -16,7 +16,7 @@ public class ItemPickUp : MonoBehaviour
     }
     public void Interact(InventoryHolder _inventoryHolder)
     {
-        if (_inventoryHolder.inventorySystem.AddToInventory(itemData, 1))
+        if (_inventoryHolder.InventorySystem.AddToInventory(itemData, 1))
         {
             Destroy(this.gameObject);
         }

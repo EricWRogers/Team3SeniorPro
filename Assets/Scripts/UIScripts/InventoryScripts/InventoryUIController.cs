@@ -20,9 +20,9 @@ public class InventoryUIController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && inventoryPanel.gameObject.activeInHierarchy)//disables the inventory 
         {
-            OpenDynamicInventory(20);
+            ToggleDynamicInventory(0);
         }
 
 
@@ -34,7 +34,7 @@ public class InventoryUIController : MonoBehaviour
         inventoryPanel.RefreshDynamicInventory(_invToDisplay);
     }
 
-    public void OpenDynamicInventory(int _invSize)
+    public void ToggleDynamicInventory(int _invSize)
     {
         if (!inventoryPanel.gameObject.activeInHierarchy)
             {

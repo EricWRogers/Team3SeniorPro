@@ -55,11 +55,11 @@ public class PlayerMovement : MonoBehaviour
              }
              if(Input.GetKey(KeyCode.Space))
              {
-                 rb.AddForce(transform.up * speed);
+                 rb.AddForce(Vector3.up * speed);
              }
              if(Input.GetKey(KeyCode.LeftControl))
              {
-                 rb.AddForce(-transform.up * speed);
+                 rb.AddForce(-Vector3.up * speed);
              }
 
 

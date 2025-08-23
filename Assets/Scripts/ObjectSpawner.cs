@@ -21,7 +21,7 @@ public class ObjectSpawner : MonoBehaviour
             }
     }
 
-    void OawGizmos()
+    void OnDrawGizmos()
     {
         
         Gizmos.color = Color.red;

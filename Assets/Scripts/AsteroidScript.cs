@@ -9,12 +9,15 @@ public class AsteroidScript : MonoBehaviour
     public void TakeDamage(float damage){
         health -= damage;
         if(health <= 0){
-            OnDestroy();
+            OnDeath();
         }
     }
     void Start()
     {
-        
+        if(!gameObject.GetComponent<Rigidbody>()){
+            gameObject.AddComponent<Rigidbody>();
+        }
+        gameObject.GetComponent<Rigidbody>().AddForce(Random.onUnitSphere * Random.Range(100f, 500f), ForceMode.Impulse);
     }
 
    
@@ -23,7 +26,7 @@ public class AsteroidScript : MonoBehaviour
         
     }
 
-    private void OnDestroy() {
+    private void OnDeath() {
         for(int i = 0; i < resourceCount; i++){
             
             Instantiate(resourcePrefab, transform.position, Quaternion.identity);

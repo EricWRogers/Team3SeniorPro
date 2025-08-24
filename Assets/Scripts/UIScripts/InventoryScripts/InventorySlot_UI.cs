@@ -7,16 +7,18 @@ public class InventorySlot_UI : MonoBehaviour
 {
     [SerializeField] private Image m_itemSprite;
     [SerializeField] private TextMeshProUGUI m_itemCount;
-    [SerializeField] private InventorySlot assignedInvSlot;
+    [SerializeField] private InventorySlot m_assignedInvSlot;
 
     private Button m_button;
 
-    public InventorySlot AssignedInvSlot => assignedInvSlot;
+    public InventorySlot AssignedInvSlot => m_assignedInvSlot;
     public InventoryDisplay parentDisplay { get; private set; }
 
     void Awake()
     {
         ClearSlot();
+
+        m_itemSprite.preserveAspect = true;
 
         m_button = GetComponent<Button>();
         m_button?.onClick.AddListener(OnUISlotClick);
@@ -26,7 +28,7 @@ public class InventorySlot_UI : MonoBehaviour
 
     public void Init(InventorySlot _slot)
     {
-        assignedInvSlot = _slot;
+        m_assignedInvSlot = _slot;
         UpdateUISlot(_slot);
     }
 
@@ -53,15 +55,15 @@ public class InventorySlot_UI : MonoBehaviour
 
     public void UpdateUISlot()
     {
-        if (assignedInvSlot != null)
+        if (m_assignedInvSlot != null)
         {
-            UpdateUISlot(assignedInvSlot);
+            UpdateUISlot(m_assignedInvSlot);
         }
     }
 
     public void ClearSlot()
     {
-        assignedInvSlot?.ClearSlot();
+        m_assignedInvSlot?.ClearSlot();
         m_itemSprite.sprite = null;
         m_itemSprite.color = Color.clear;
         m_itemCount.text = "";

@@ -4,24 +4,34 @@ using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 public class MouseItemData : MonoBehaviour
 {
     public Image itemSprite;
     public TextMeshProUGUI itemCount;
     public InventorySlot assignedInventorySlot;
-    public Transform player;
+    private Transform m_player;
+    public float ItemDropOffset = 1;
 
     void Awake()
     {
         itemSprite.color = Color.clear;
+        itemSprite.preserveAspect = true;
         itemCount.text = "";
+
+        m_player = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        if (m_player = null) Debug.LogWarning("Player not found");
     }
     public void UpdateMouseSlot(InventorySlot _invSlot)
     {
         assignedInventorySlot.AssignItem(_invSlot);
-        itemSprite.sprite = _invSlot.ItemData.image;
-        itemCount.text = _invSlot.StackSize.ToString();
+        UpdateMouseSlot();
+    }
+    public void UpdateMouseSlot()
+    {
+        itemSprite.sprite = assignedInventorySlot.ItemData.image;
+        itemCount.text = assignedInventorySlot.StackSize.ToString();
         itemSprite.color = Color.white;
     }
 
@@ -33,8 +43,15 @@ public class MouseItemData : MonoBehaviour
 
             if (Mouse.current.leftButton.wasPressedThisFrame && !IsPointerOverUIObject())
             {
-                DropOneItemFromStack(assignedInventorySlot);
-                
+                Instantiate(assignedInventorySlot.ItemData.itemPrefab, m_player.position + m_player.forward * ItemDropOffset, quaternion.identity);
+
+                if (assignedInventorySlot.StackSize > 1)
+                {
+                    assignedInventorySlot.AddToStack(-1);
+                    UpdateMouseSlot();
+                }
+                else
+                    ClearSlot();
             }
 
         }
@@ -46,12 +63,12 @@ public class MouseItemData : MonoBehaviour
         {
             if (_slotToDrop.StackSize > 1)
             {
-                Instantiate(_slotToDrop.ItemData.itemPrefab, new Vector3(player.position.x, player.position.y - 1, player.position.z), Quaternion.identity);
+                Instantiate(_slotToDrop.ItemData.itemPrefab, new Vector3(m_player.position.x, m_player.position.y - 1, m_player.position.z), Quaternion.identity);
                 _slotToDrop.RemoveFromStack(1);
             }
             else
             {
-                Instantiate(_slotToDrop.ItemData.itemPrefab, new Vector3(player.position.x, player.position.y - 1, player.position.z), Quaternion.identity);
+                Instantiate(_slotToDrop.ItemData.itemPrefab, new Vector3(m_player.position.x, m_player.position.y - 1, m_player.position.z), Quaternion.identity);
                 ClearSlot();
             }
             

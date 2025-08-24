@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53508212b830714a8fe6ec602715be1, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  id: 6
+  id: 4
   displayName: Water
   description: Purified water safe to drink.
-  Image: {fileID: 0}
+  image: {fileID: 0}
   maxStack: 20
-  iteamPrefab: {fileID: 0}
+  itemPrefab: {fileID: 0}

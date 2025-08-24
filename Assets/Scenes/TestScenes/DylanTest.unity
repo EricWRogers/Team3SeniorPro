@@ -294,7 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minningRange: 3
   fireRate: 1
-  miningDamage: 1
+  miningDamage: 2
   miningGunActive: 1
   fireRateShooting: 1
   firePoint: {fileID: 1002732996}
@@ -690,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4578405244457767980, guid: 052bf9aff409a93e59b9ee4ce8d94118, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.5266447
+      value: 32.5
       objectReference: {fileID: 0}
     - target: {fileID: 4578405244457767980, guid: 052bf9aff409a93e59b9ee4ce8d94118, type: 3}
       propertyPath: m_LocalPosition.y
@@ -698,7 +698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4578405244457767980, guid: 052bf9aff409a93e59b9ee4ce8d94118, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16.552324
+      value: -42.8
       objectReference: {fileID: 0}
     - target: {fileID: 4578405244457767980, guid: 052bf9aff409a93e59b9ee4ce8d94118, type: 3}
       propertyPath: m_LocalRotation.w

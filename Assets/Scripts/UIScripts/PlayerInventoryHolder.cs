@@ -18,6 +18,7 @@ public class PlayerInventoryHolder : InventoryHolder
         {
             player.DisableMovemnent();
             OnPlayerInventoryDisplayRequested?.Invoke(PrimaryInventorySystem, offset);
+            
         }
     }
 

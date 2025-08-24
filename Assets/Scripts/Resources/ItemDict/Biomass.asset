@@ -17,4 +17,4 @@ MonoBehaviour:
   description: Is...this edible???
   image: {fileID: 21300000, guid: 554c7a22b5da5444db4f614305566f12, type: 3}
   maxStack: 20
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 7575135043808841362, guid: 64830d35e9719e544847be1232599b0c, type: 3}

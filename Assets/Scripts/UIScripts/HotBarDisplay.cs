@@ -1,9 +1,15 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class HotBarDisplay : StaticInventoryDisplay
 {
     private int m_maxIndexSize = 9;
     private int m_currentIndex = 0;
+    private int m_currentItemID;
+
+    public GameObject hand;
+
+    private GameObject m_player;
 
     private void Awake()
     {
@@ -13,14 +19,24 @@ public class HotBarDisplay : StaticInventoryDisplay
     protected override void Start()
     {
         base.Start();
-
+        m_player = GameObject.FindWithTag("Player");
         m_currentIndex = 0;
         m_maxIndexSize = m_slots.Length - 1;
+        m_currentItemID = -1;
         m_slots[m_currentIndex].ToggleHighlight();
     }
 
     private void Update()
     {
+        if (m_slots[m_currentIndex].AssignedInvSlot.ItemData != null)
+        {
+            if (m_currentItemID != m_slots[m_currentIndex].AssignedInvSlot.ItemData.id)
+            {
+                HoldItem();
+                m_currentItemID = m_slots[m_currentIndex].AssignedInvSlot.ItemData.id;
+            }
+        }
+
         if (Input.mouseScrollDelta.y > 0)
         {
             ChangeIndex(1);
@@ -81,8 +97,16 @@ public class HotBarDisplay : StaticInventoryDisplay
         }
     }
 
+    private void HoldItem()
+    {
+        GameObject item = Instantiate(m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab, hand.transform.position, m_player.transform.rotation, hand.transform);
+        item.GetComponent<Collider>().enabled = false;
+        item.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
     private void ChangeIndex(int _direction)
     {
+        EmptyHand();
         m_slots[m_currentIndex].ToggleHighlight();
         m_currentIndex += _direction;
         if (m_currentIndex > m_maxIndexSize)
@@ -94,10 +118,15 @@ public class HotBarDisplay : StaticInventoryDisplay
             m_currentIndex = m_maxIndexSize;
         }
         m_slots[m_currentIndex].ToggleHighlight();
+        if (m_slots[m_currentIndex].AssignedInvSlot.ItemData != null)
+        {
+            HoldItem();
+        }
     }
 
     private void SetSlot(int newIndex)
     {
+        EmptyHand();
         m_slots[m_currentIndex].ToggleHighlight();
 
         if (newIndex < 0) newIndex = 0;
@@ -105,5 +134,15 @@ public class HotBarDisplay : StaticInventoryDisplay
         m_currentIndex = newIndex;
 
         m_slots[m_currentIndex].ToggleHighlight();
+        if (m_slots[m_currentIndex].AssignedInvSlot.ItemData != null)
+        {
+            HoldItem();
+        }
+    }
+
+    public void EmptyHand()
+    {
+        if(hand.transform.childCount > 0)
+            Destroy(hand.transform.GetChild(0).gameObject);
     }
 }

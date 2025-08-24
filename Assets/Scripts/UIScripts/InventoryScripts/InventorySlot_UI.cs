@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 public class InventorySlot_UI : MonoBehaviour
 {
     [SerializeField] private Image m_itemSprite;
+    [SerializeField] private GameObject m_slotHighlight;
     [SerializeField] private TextMeshProUGUI m_itemCount;
     [SerializeField] private InventorySlot m_assignedInvSlot;
 
@@ -51,6 +52,11 @@ public class InventorySlot_UI : MonoBehaviour
         {
             m_itemCount.text = "";
         }
+    }
+
+    public void ToggleHighlight()
+    {
+        m_slotHighlight.SetActive(!m_slotHighlight.activeInHierarchy);
     }
 
     public void UpdateUISlot()

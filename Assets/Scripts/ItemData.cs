@@ -10,4 +10,9 @@ public class ItemData : ScriptableObject
     public Sprite image;
     public int maxStack = 20;
     public GameObject itemPrefab;
+
+    public void UseItem()
+    {
+        Debug.Log($"Using {displayName}");
+    }
 }

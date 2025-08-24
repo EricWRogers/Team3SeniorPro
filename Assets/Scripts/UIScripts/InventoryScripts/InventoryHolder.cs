@@ -6,15 +6,17 @@ public class InventoryHolder : MonoBehaviour
 {
     //this script creates inventory 
     [SerializeField] private int m_inventorySize;
-    [SerializeField] protected InventorySystem inventorySystem;
+    [SerializeField] protected InventorySystem primaryInventorySystem;
+    public int offset = 10;
+    
 
-    public InventorySystem InventorySystem => inventorySystem;
+    public InventorySystem PrimaryInventorySystem => primaryInventorySystem;
 
-    public static UnityAction<InventorySystem> OnDynamicInventoryDisplayRequested;
+    public static UnityAction<InventorySystem, int> OnDynamicInventoryDisplayRequested;//inv to display, amount to offset
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        inventorySystem = new InventorySystem(m_inventorySize);
+        primaryInventorySystem = new InventorySystem(m_inventorySize);
     }
 
 }

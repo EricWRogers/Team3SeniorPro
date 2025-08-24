@@ -11,7 +11,7 @@ public class PlayerInteract : MonoBehaviour
     public bool lookingAtItem = false;
     public bool lookingAtInteractable = false;
     public Transform startPos;
-    public InventoryHolder inventoryHolder;
+    public PlayerInventoryHolder inventoryHolder;
     private PlayerMovement playerMovement;
     void Start()
     {

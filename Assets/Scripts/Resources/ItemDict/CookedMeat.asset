@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 2
   displayName: Cooked Meat
   description: A tasty piece of meat from an alien lifeform. hopfully its edible.
-  Image: {fileID: 0}
+  image: {fileID: 0}
   maxStack: 20
-  iteamPrefab: {fileID: 0}
+  itemPrefab: {fileID: 0}

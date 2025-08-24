@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53508212b830714a8fe6ec602715be1, type: 3}
   m_Name: Multi-Tool
   m_EditorClassIdentifier: 
-  id: 1
+  id: 0
   displayName: Multi-Tool
   description: Trust tool for mining and self defense.
-  Image: {fileID: 0}
+  image: {fileID: 0}
   maxStack: 1
-  iteamPrefab: {fileID: 0}
+  itemPrefab: {fileID: 0}

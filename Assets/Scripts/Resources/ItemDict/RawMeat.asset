@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53508212b830714a8fe6ec602715be1, type: 3}
   m_Name: RawMeat
   m_EditorClassIdentifier: 
-  id: 4
+  id: 1
   displayName: Raw Meat
   description: A hunk of raw meat from alien lifeform. Probably best to cook it before
     eating.

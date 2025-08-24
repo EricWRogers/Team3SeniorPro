@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53508212b830714a8fe6ec602715be1, type: 3}
   m_Name: IronBar
   m_EditorClassIdentifier: 
-  id: 7
+  id: 6
   displayName: Iron Bar
   description: Bar of pure iron useful for more advanced crafting.
   image: {fileID: 0}

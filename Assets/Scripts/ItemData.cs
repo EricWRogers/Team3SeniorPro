@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/ItemData")]
 public class ItemData : ScriptableObject
 {
-    public int id;
+    public int id = -1;
     public string displayName;
     [TextArea(4, 4)]
     public string description;

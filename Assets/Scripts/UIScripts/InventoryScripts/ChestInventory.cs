@@ -11,13 +11,13 @@ public class ChestInventory : InventoryHolder, IInteractable
 
     public void Interact(PlayerInteract _interactor, out bool _interactSuccess)
     {
-        OnDynamicInventoryDisplayRequested?.Invoke(inventorySystem);
+        OnDynamicInventoryDisplayRequested?.Invoke(primaryInventorySystem, 0);
         _interactSuccess = true;
     }
 
     public bool EndInteraction()
     {
-        inventoryUIController.ToggleDynamicInventory(inventorySystem.inventorySize);
+        inventoryUIController.ToggleChestInventory(primaryInventorySystem.inventorySize);
         return true;
     }
 

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d53508212b830714a8fe6ec602715be1, type: 3}
-  m_Name: Ice
+  m_Name: Biomass
   m_EditorClassIdentifier: 
-  id: 3
-  displayName: Ice
-  description: Frosty
-  image: {fileID: 21300000, guid: b66a107fb9fdb9045ad96b9d8f0b5c62, type: 3}
+  id: 7
+  displayName: Biomass
+  description: Is...this edible???
+  image: {fileID: 21300000, guid: 554c7a22b5da5444db4f614305566f12, type: 3}
   maxStack: 20
-  itemPrefab: {fileID: 7358872634615016230, guid: e953954b569116e48bdcb192c7c8b516, type: 3}
+  itemPrefab: {fileID: 7575135043808841362, guid: 64830d35e9719e544847be1232599b0c, type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   displayName: Water
-  description: Purified water safe to drink.
-  image: {fileID: 0}
+  description: It is wet...
+  image: {fileID: 21300000, guid: 98d1d240ae9850e44b2b7fdeb3ef9308, type: 3}
   maxStack: 20
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 1811559450088765769, guid: c94b7496a4593524bbd0c6f47ea7c3b5, type: 3}

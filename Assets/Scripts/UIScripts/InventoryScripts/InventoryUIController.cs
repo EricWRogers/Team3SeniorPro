@@ -36,6 +36,7 @@ public class InventoryUIController : MonoBehaviour
             if (inventoryPanel.gameObject.activeInHierarchy)//disables the inventory 
             {
                 InventoryBackground.SetActive(false);
+                ToggleChestInventory(0);
             }
             if (playerBackPack.gameObject.activeInHierarchy)//disables the inventory 
             {

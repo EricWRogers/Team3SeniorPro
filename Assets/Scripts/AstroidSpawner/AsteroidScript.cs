@@ -31,6 +31,7 @@ public class AsteroidScript : MonoBehaviour
             
             Instantiate(resourcePrefab, transform.position, Quaternion.identity);
         }
+        ObjectSpawner.instance.DestoryedAstroid();
         Destroy(gameObject);
     }    
 }

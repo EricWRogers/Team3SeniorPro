@@ -9,23 +9,23 @@ public class PlayerManager : MonoBehaviour
     public UnityEvent PlayerDeath;
 
     [Header("Health")]
-    [SerializeField] private float maxHealth = 100;
-    private float currentHealth;
-    public float currentHealthPercentage => currentHealth / maxHealth;
+    [SerializeField] private float m_maxHealth = 100;
+    private float m_currentHealth;
+    public float currentHealthPercentage => m_currentHealth / m_maxHealth;
 
 
     [Header("Hunger")]
-    [SerializeField] private float maxHunger = 100;
-    [SerializeField] private float hungerDecayRate = 0.3f;
-    private float currentHunger;
-    public float currentHungerPercentage => currentHunger / maxHunger;
+    [SerializeField] private float m_maxHunger = 100;
+    [SerializeField] private float m_hungerDecayRate = 0.3f;
+    private float m_currentHunger;
+    public float currentHungerPercentage => m_currentHunger / m_maxHunger;
 
 
     [Header("Thirst")]
-    [SerializeField] private float maxThirst = 100;
-    [SerializeField] private float thirstDecayRate = 0.3f;
-    private float currentThirst;
-    public float currentThirstPercentage => currentThirst / maxThirst;
+    [SerializeField] private float m_maxThirst = 100;
+    [SerializeField] private float m_thristDecayRate = 0.3f;
+    private float m_currentThirst;
+    public float currentThirstPercentage => m_currentThirst / m_maxThirst;
 
 
     [Header("Oxygen")]
@@ -59,22 +59,22 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        currentHunger -= hungerDecayRate * Time.deltaTime;
-        currentThirst -= thirstDecayRate * Time.deltaTime;
+        m_currentHunger -= m_hungerDecayRate * Time.deltaTime;
+        m_currentThirst -= m_thristDecayRate * Time.deltaTime;
 
-        if (currentHunger <= 0 || currentThirst <= 0)
+        if (m_currentHunger <= 0 || m_currentThirst <= 0)
         {
             TakeDamage(1f);
-            currentHunger = 0;
-            currentThirst = 0;
+            m_currentHunger = 0;
+            m_currentThirst = 0;
         }
     }
 
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= (int)damage;
-        if (currentHealth <= 0)
+        m_currentHealth -= (int)damage;
+        if (m_currentHealth <= 0)
         {
             Death();
         }
@@ -82,28 +82,28 @@ public class PlayerManager : MonoBehaviour
 
     public void Heal(float amount)
     {
-        currentHealth += amount;
-        if (currentHealth > maxHealth)
+        m_currentHealth += amount;
+        if (m_currentHealth > m_maxHealth)
         {
-            currentHealth = maxHealth;
+            m_currentHealth = m_maxHealth;
         }
     }
 
     public void Eat(float amount)
     {
-        currentHunger += amount;
-        if (currentHunger > maxHunger)
+        m_currentHunger += amount;
+        if (m_currentHunger > m_maxHunger)
         {
-            currentHunger = maxHunger;
+            m_currentHunger = m_maxHunger;
         }
     }
 
     public void Drink(float amount)
     {
-        currentThirst += amount;
-        if (currentThirst > maxThirst)
+        m_currentThirst += amount;
+        if (m_currentThirst > m_maxThirst)
         {
-            currentThirst = maxThirst;
+            m_currentThirst = m_maxThirst;
         }
     }
 

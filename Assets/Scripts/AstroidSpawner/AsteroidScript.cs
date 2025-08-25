@@ -17,7 +17,7 @@ public class AsteroidScript : MonoBehaviour
         if(!gameObject.GetComponent<Rigidbody>()){
             gameObject.AddComponent<Rigidbody>();
         }
-        gameObject.GetComponent<Rigidbody>().AddForce(Random.onUnitSphere * Random.Range(100f, 500f), ForceMode.Impulse);
+        gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward*1000, ForceMode.Impulse);
     }
 
    

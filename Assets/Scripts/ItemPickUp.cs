@@ -3,6 +3,7 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     public ItemData itemData;
+    public GameObject itemObj;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -12,7 +13,7 @@ public class ItemPickUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     public void Interact(PlayerInventoryHolder _inventoryHolder)
     {

@@ -17,4 +17,4 @@ MonoBehaviour:
   description: Trust tool for mining and self defense.
   image: {fileID: 0}
   maxStack: 1
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 6447181087649908837, guid: 59c2861727c9316e6956b99cd9ecefac, type: 3}

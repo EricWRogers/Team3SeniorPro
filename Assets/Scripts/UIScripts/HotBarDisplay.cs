@@ -91,15 +91,12 @@ public class HotBarDisplay : StaticInventoryDisplay
 
     private void UseItem()
     {
-        if (m_slots[m_currentIndex].AssignedInvSlot.ItemData != null)
-        {
-            m_slots[m_currentIndex].AssignedInvSlot.ItemData.UseItem();
-        }
+        
     }
 
     private void HoldItem()
     {
-        GameObject item = Instantiate(m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab, hand.transform.position, m_player.transform.rotation, hand.transform);
+        GameObject item = Instantiate(m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab, hand.transform.position, hand.transform.rotation, hand.transform);
         item.GetComponent<Collider>().enabled = false;
         item.GetComponent<Rigidbody>().isKinematic = true;
     }

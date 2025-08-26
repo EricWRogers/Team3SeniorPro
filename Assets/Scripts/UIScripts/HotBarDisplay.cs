@@ -87,6 +87,10 @@ public class HotBarDisplay : StaticInventoryDisplay
         {
             SetSlot(9);
         }
+        if (m_slots[m_currentIndex].AssignedInvSlot.ItemData == null)
+        {
+            EmptyHand();
+        }
     }
 
     private void UseItem()

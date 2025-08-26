@@ -7,12 +7,29 @@ public class CraftingScript : MonoBehaviour
     public Recipes recipes;
     public List<ItemData> m_requiredItems = new List<ItemData>();
     public PlayerInventoryHolder playerInventory;
-
-    public bool hasAllIngredints;
+    private int m_itemCounter;
 
     public void Craft(RecipeRef _recipe)
     {
-        Debug.Log(CheckForingredints(_recipe, out List<InventorySlot> _invSlot));
+        if (CheckForingredints(_recipe, out List<InventorySlot> _invSlots))
+        {
+            if (_invSlots.Count == 1)
+            {
+                if (m_itemCounter < 0)
+                {
+                    int itemsLeftInStack = Mathf.Abs(m_itemCounter);
+                    _invSlots[0].UpdateInventorySlot(_invSlots[0].ItemData, itemsLeftInStack);
+                    PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                }
+                else if (m_itemCounter == 0)
+                {
+                    _invSlots[0].ClearSlot();
+                    PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                }
+                playerInventory.AddToInventory(_recipe.recipe, 1);
+            }
+
+        }
 
 
     }
@@ -30,18 +47,22 @@ public class CraftingScript : MonoBehaviour
         }
         foreach (ItemData item in distinctItemList)
         {
-            int itemCounter = requiredItemDict[item];
+            m_itemCounter = requiredItemDict[item];
             for (int x = playerInventory.PrimaryInventorySystem.inventorySize - 1; x > -1; x--)
             {
-                if (playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData == item && itemCounter >= 0)
+                if (m_itemCounter > 0)
                 {
-                    _invSlot.Add(playerInventory.PrimaryInventorySystem.InventorySlots[x]);
-                    itemCounter -= playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize;
-                    //Debug.Log($"inventory slot {x} has {playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize} {playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData} ");
+                    if (playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData == item)
+                    {
+                        _invSlot.Add(playerInventory.PrimaryInventorySystem.InventorySlots[x]);
+                        m_itemCounter -= playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize;
+                        Debug.Log($"inventory slot {x} has {playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize} {playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData} ");
+                        Debug.Log($"itemCounter is {m_itemCounter}");
+                    }
                 }
-                
+
             }
-            if (itemCounter > 0)
+            if (m_itemCounter > 0)
             {
                 return false;
             }
@@ -63,7 +84,17 @@ public class CraftingScript : MonoBehaviour
                 }
             }
         }
-            
+
         return count;
+    }
+
+    public Dictionary<ItemData, int> MakeDistinctDict(List<ItemData> _keys)
+    {
+        Dictionary<ItemData, int> _distinctDict = new();
+        foreach (ItemData item in _keys)
+        {
+            _distinctDict.Add(item, GetNumOfItem(_keys, item));
+        }
+        return _distinctDict;
     }
 }

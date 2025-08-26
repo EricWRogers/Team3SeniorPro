@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4566893637358340743}
   - component: {fileID: 4721294477697881782}
   - component: {fileID: 2740383835666006689}
+  - component: {fileID: 1530808727338589474}
   - component: {fileID: 4302458520860442972}
   m_Layer: 0
   m_Name: Biomass
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7575135043808841362}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.43, y: -1.7700001, z: 0}
   m_LocalScale: {x: 0.2, y: 0.3, z: 0.2}
   m_ConstrainProportionsScale: 1
@@ -139,6 +140,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1530808727338589474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7575135043808841362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ce318fca379894a868805b5440be28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerRestored: 0
+  thirstRestored: 0
+  healthRestored: 0
+  oxygenRestored: 0
 --- !u!114 &4302458520860442972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +169,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 599c460ee0678c94dae5caaebe31457a, type: 2}
+  itemObj: {fileID: 0}

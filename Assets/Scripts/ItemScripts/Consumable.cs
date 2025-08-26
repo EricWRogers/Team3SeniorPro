@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Consumable : ItemData
+public class Consumable : MonoBehaviour
 {
     public float hungerRestored;
     public float thirstRestored;

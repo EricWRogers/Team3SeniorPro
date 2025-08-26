@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3260215359904540871}
   - component: {fileID: 7464509648346412772}
   - component: {fileID: 2678075685447179287}
+  - component: {fileID: 7353411783364895893}
   - component: {fileID: 5036586187973250301}
   - component: {fileID: 65797827860997864}
   m_Layer: 0
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811559450088765769}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.43, y: -1.3100001, z: 0}
   m_LocalScale: {x: 0.2, y: 0.3, z: 0.2}
   m_ConstrainProportionsScale: 1
@@ -116,6 +117,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7353411783364895893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811559450088765769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ce318fca379894a868805b5440be28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerRestored: 0
+  thirstRestored: 0
+  healthRestored: 0
+  oxygenRestored: 0
 --- !u!114 &5036586187973250301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: d9f9cd17bb5b98a44a014822d9484dae, type: 2}
+  itemObj: {fileID: 0}
 --- !u!136 &65797827860997864
 CapsuleCollider:
   m_ObjectHideFlags: 0

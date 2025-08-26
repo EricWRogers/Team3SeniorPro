@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class RecipeRef : MonoBehaviour
 {
-    public ItemData recipe;
+    public Recipes outcome;
 }

@@ -5,13 +5,14 @@ using UnityEngine;
 public class CraftingScript : MonoBehaviour
 {
     public Recipes recipes;
-    public List<ItemData> m_requiredItems = new List<ItemData>();
+    private List<ItemData> m_requiredItems = new List<ItemData>();
     public PlayerInventoryHolder playerInventory;
     private int m_itemCounter;
 
-    public void Craft(RecipeRef _recipe)
+    public void Craft(Recipes _recipe)
     {
-        if (CheckForingredints(_recipe, out List<InventorySlot> _invSlots))
+        //Debug.Log(CheckForingredints(_recipe, out List<InventorySlot> invSlots, out List<ItemData> distinctItemList, out Dictionary<ItemData, int> itemAmounts));
+        if (CheckForingredints(_recipe, out List<InventorySlot> _invSlots, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts))
         {
             if (_invSlots.Count == 1)
             {
@@ -26,7 +27,26 @@ public class CraftingScript : MonoBehaviour
                     _invSlots[0].ClearSlot();
                     PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
                 }
-                playerInventory.AddToInventory(_recipe.recipe, 1);
+                playerInventory.AddToInventory(_recipe.outcome, _recipe.amountOfOutcome);
+            }
+            else if (_invSlots.Count > 1)
+            {
+                for (int i = 0; i < _invSlots.Count; i++)
+                {
+                    if (_invSlots[i].StackSize > _itemAmounts[_invSlots[i].ItemData])
+                    {
+                        int itemsLeftInStack = _invSlots[i].StackSize - _itemAmounts[_invSlots[i].ItemData];
+                        _invSlots[i].UpdateInventorySlot(_invSlots[i].ItemData, itemsLeftInStack);
+                        PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                    }
+                    else if (_invSlots[i].StackSize <= _itemAmounts[_invSlots[i].ItemData])
+                    {
+                        _itemAmounts[_invSlots[i].ItemData] = _itemAmounts[_invSlots[i].ItemData] - _invSlots[i].StackSize;
+                        _invSlots[i].ClearSlot();
+                        PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                    }
+                }
+                playerInventory.AddToInventory(_recipe.outcome, _recipe.amountOfOutcome);
             }
 
         }
@@ -34,35 +54,80 @@ public class CraftingScript : MonoBehaviour
 
     }
 
-    public bool CheckForingredints(RecipeRef _recipeToCheck, out List<InventorySlot> _invSlot)
+    public bool TryRepair(List<ItemData> _itemsNeedToRepair)
     {
-        m_requiredItems = (recipes.allRecipes[_recipeToCheck.recipe]);
-        List<ItemData> distinctItemList = m_requiredItems.Distinct<ItemData>().ToList();
-        PseudoDictionary<ItemData, int> requiredItemDict = new PseudoDictionary<ItemData, int>();
-        _invSlot = new();
+        //Debug.Log(CheckForingredints(_recipe, out List<InventorySlot> invSlots, out List<ItemData> distinctItemList, out Dictionary<ItemData, int> itemAmounts));
+        if (CheckForItemsinInventory(_itemsNeedToRepair, out List<InventorySlot> _invSlots, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts))
+        {
+            if (_invSlots.Count == 1)
+            {
+                if (m_itemCounter < 0)
+                {
+                    int itemsLeftInStack = Mathf.Abs(m_itemCounter);
+                    _invSlots[0].UpdateInventorySlot(_invSlots[0].ItemData, itemsLeftInStack);
+                    PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                }
+                else if (m_itemCounter == 0)
+                {
+                    _invSlots[0].ClearSlot();
+                    PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                }
+            }
+            else if (_invSlots.Count > 1)
+            {
+                for (int i = 0; i < _invSlots.Count; i++)
+                {
+                    if (_invSlots[i].StackSize > _itemAmounts[_invSlots[i].ItemData])
+                    {
+                        int itemsLeftInStack = _invSlots[i].StackSize - _itemAmounts[_invSlots[i].ItemData];
+                        _invSlots[i].UpdateInventorySlot(_invSlots[i].ItemData, itemsLeftInStack);
+                        PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                    }
+                    else if (_invSlots[i].StackSize <= _itemAmounts[_invSlots[i].ItemData])
+                    {
+                        _itemAmounts[_invSlots[i].ItemData] = _itemAmounts[_invSlots[i].ItemData] - _invSlots[i].StackSize;
+                        _invSlots[i].ClearSlot();
+                        PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                    }
+                }
+            }
+            return true;
 
-        foreach (ItemData item in distinctItemList)
-        {
-            requiredItemDict.Add(item, GetNumOfItem(m_requiredItems, item));
         }
-        foreach (ItemData item in distinctItemList)
+        else return false;
+
+
+    }
+
+    public bool CheckForingredints(Recipes _recipeToCheck, out List<InventorySlot> _invSlot, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts)
+    {
+        _distinctItemList = _recipeToCheck.recipe.Distinct<ItemData>().ToList();
+        _itemAmounts = new();
+        _invSlot = new();
+        Dictionary<ItemData, int> checker = new();
+
+        foreach (ItemData item in _distinctItemList)
         {
-            m_itemCounter = requiredItemDict[item];
+            //Debug.Log($"added {GetNumOfItem(_recipeToCheck.recipe, item)} {item} to _itemAmounts");
+            _itemAmounts.Add(item, GetNumOfItem(_recipeToCheck.recipe, item));
+        }
+        foreach (ItemData item in _distinctItemList)
+        {
+            checker.Add(item, 0);
             for (int x = playerInventory.PrimaryInventorySystem.inventorySize - 1; x > -1; x--)
             {
-                if (m_itemCounter > 0)
+                if (checker[item] < _itemAmounts[item])
                 {
                     if (playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData == item)
                     {
                         _invSlot.Add(playerInventory.PrimaryInventorySystem.InventorySlots[x]);
-                        m_itemCounter -= playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize;
-                        Debug.Log($"inventory slot {x} has {playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize} {playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData} ");
-                        Debug.Log($"itemCounter is {m_itemCounter}");
+                        checker[item] += playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize;
+                        //Debug.Log($"the checker has {checker[item]} {item} and you need {_itemAmounts[item]} {item}");
                     }
                 }
 
             }
-            if (m_itemCounter > 0)
+            if (checker[item] < _itemAmounts[item])
             {
                 return false;
             }
@@ -70,7 +135,43 @@ public class CraftingScript : MonoBehaviour
         return true;
     }
 
-    public int GetNumOfItem<ItemData>(List<ItemData> _list, ItemData _itemToCount)
+    public bool CheckForItemsinInventory(List<ItemData> _itemsToCheckFor, out List<InventorySlot> _invSlot, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts)
+    {
+        _distinctItemList = _itemsToCheckFor.Distinct<ItemData>().ToList();
+        _itemAmounts = new();
+        _invSlot = new();
+        Dictionary<ItemData, int> checker = new();
+
+        foreach (ItemData item in _distinctItemList)
+        {
+            Debug.Log($"added {GetNumOfItem(_itemsToCheckFor, item)} {item} to _itemAmounts");
+            _itemAmounts.Add(item, GetNumOfItem(_itemsToCheckFor, item));
+        }
+        foreach (ItemData item in _distinctItemList)
+        {
+            checker.Add(item, 0);
+            for (int x = playerInventory.PrimaryInventorySystem.inventorySize - 1; x > -1; x--)
+            {
+                if (checker[item] < _itemAmounts[item])
+                {
+                    if (playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData == item)
+                    {
+                        _invSlot.Add(playerInventory.PrimaryInventorySystem.InventorySlots[x]);
+                        checker[item] += playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize;
+                        Debug.Log($"the checker has {checker[item]} {item} and you need {_itemAmounts[item]} {item}");
+                    }
+                }
+
+            }
+            if (checker[item] < _itemAmounts[item])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int GetNumOfItem(List<ItemData> _list, ItemData _itemToCount)
     {
         int count = 0;
         List<ItemData> distinctItemList = _list.Distinct<ItemData>().ToList();
@@ -78,7 +179,7 @@ public class CraftingScript : MonoBehaviour
         {
             foreach (ItemData _item in _list)
             {
-                if (EqualityComparer<ItemData>.Default.Equals(_item, _itemToCount))
+                if (_item == item && _item == _itemToCount)
                 {
                     count++;
                 }

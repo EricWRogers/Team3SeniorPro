@@ -26,13 +26,22 @@ public class AsteroidScript : MonoBehaviour
         spinSpeed = Random.Range(minSpinSpeed, maxSpinSpeed);
         float thrust = Random.Range(minThrust, maxThrust);
 
-         rb.AddForce(Vector3.forward * thrust , ForceMode.Impulse);
+         rb.AddForce(Vector3.left * thrust , ForceMode.Impulse);
     }
 
 
     void Update()
     {
         transform.Rotate(Vector3.up * spinSpeed * Time.deltaTime);
+        if (transform.position.magnitude - ObjectSpawner.instance.transform.position.magnitude > 300f)
+        {
+            transform.localScale = transform.localScale * 0.9f;
+            if (transform.localScale.x < 0.1f)
+            {
+                Destroy(gameObject);
+                ObjectSpawner.instance.DestoryedAstroid();
+            }
+        }
     }
 
     private void OnDeath()

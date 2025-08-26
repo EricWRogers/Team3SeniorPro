@@ -47,6 +47,7 @@ MonoBehaviour:
   objectToSpawn:
   - {fileID: 2577717133516980202, guid: 30aae601eb6d14e95a836e61fb768292, type: 3}
   - {fileID: 2577717133516980202, guid: 052bf9aff409a93e59b9ee4ce8d94118, type: 3}
-  poolSize: 0
-  spawnInterval: 5
-  spawnAreaSize: {x: 100, y: 20, z: 100}
+  - {fileID: 1772253293332027144, guid: d8a8ff8aea2a43e6d9595a552f3101f8, type: 3}
+  poolSize: 200
+  spawnInterval: 0.1
+  spawnAreaSize: {x: 100, y: 50, z: 100}

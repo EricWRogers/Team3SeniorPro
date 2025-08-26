@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,7 @@ public class PlayerInteract : MonoBehaviour
     public Transform startPos;
     public PlayerInventoryHolder inventoryHolder;
     private PlayerMovement playerMovement;
+    public HotBarDisplay hotBarDisplay;
     void Start()
     {
         gameObject.TryGetComponent<PlayerMovement>(out playerMovement);
@@ -26,6 +28,11 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            hotBarDisplay.UseItem();
+        }
+
         if (Physics.Raycast(new Ray(startPos.position, startPos.forward), out RaycastHit hit, 2f))
         {
             if (hit.collider.CompareTag("Interactable"))
@@ -56,7 +63,7 @@ public class PlayerInteract : MonoBehaviour
         {
             Debug.Log("Interacted with: " + hit.collider.name);
             hit.collider.GetComponent<ItemPickUp>().Interact(inventoryHolder);
-            
+
         }
         if (lookingAtInteractable && Input.GetKeyDown(KeyCode.E))
         {

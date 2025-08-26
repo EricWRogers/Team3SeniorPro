@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ce318fca379894a868805b5440be28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerRestored: 0
-  thirstRestored: 0
+  hungerRestored: 15
+  thirstRestored: 15
   healthRestored: 0
   oxygenRestored: 0
 --- !u!114 &4302458520860442972
@@ -169,4 +169,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 599c460ee0678c94dae5caaebe31457a, type: 2}
-  itemObj: {fileID: 0}

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Consumable : MonoBehaviour
@@ -6,19 +7,19 @@ public class Consumable : MonoBehaviour
     public float thirstRestored;
     public float healthRestored;
     public float oxygenRestored;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
         
     }
-    public void UseItem()
+    public void ConsumeItem()
     {
-        
+        PlayerManager player = GameObject.FindWithTag("Player").GetComponent<PlayerManager>();
+        player.Eat(hungerRestored);
+        player.Drink(thirstRestored);
+        player.OxygenFill(oxygenRestored);
+        player.Heal(healthRestored);
+
     }
 }

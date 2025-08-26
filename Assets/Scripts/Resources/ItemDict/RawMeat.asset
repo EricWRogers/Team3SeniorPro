@@ -19,3 +19,4 @@ MonoBehaviour:
   image: {fileID: 0}
   maxStack: 20
   itemPrefab: {fileID: 2899418314725480978, guid: a1acd352995793e48b792dfb5ff6c990, type: 3}
+  itemTypes: 0

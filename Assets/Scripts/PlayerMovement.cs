@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float mouseSensitivity = 1f;
     private float xRotation = 0f;
     private float yRotation = 0f;
+    private float zRotation = 0f;
     public bool lockedCursor = true;
 
     [Header("Player Settings")]
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5f;
     public float maxSpeed = 10f; // maximum speed the player can reach
     public float friction = 0.05f; // how fast you slow down when not pressing keys
+    public float pitchSpeed = 50f;
 
 
 
@@ -61,22 +63,34 @@ public class PlayerMovement : MonoBehaviour
              {
                  rb.AddForce(-Vector3.up * speed);
              }
-
-
-
-             if(rb.linearVelocity.magnitude > 0.001f)
+             
+            
+             if(Input.GetKey(KeyCode.V))
              {
-                 rb.linearVelocity -= rb.linearVelocity * friction; // Apply Friction
-                 rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed); // Limit speed
+               zRotation += pitchSpeed * Time.deltaTime;
              }
+            
+            if (Input.GetKey(KeyCode.B))
+            {
+                zRotation -= pitchSpeed * Time.deltaTime;
+            }
+
+
+
+
+             if (rb.linearVelocity.magnitude > 0.001f)
+            {
+                rb.linearVelocity -= rb.linearVelocity * friction; // Apply Friction
+                rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed); // Limit speed
+            }
 
              float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity; 
              float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
              yRotation += mouseX;
              xRotation -= mouseY;
-             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-             transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+             //xRotation = Mathf.Clamp(xRotation, -90f, 90f); clamps vertical look
+             transform.localRotation = Quaternion.Euler(xRotation, yRotation, zRotation);
 
        
         }

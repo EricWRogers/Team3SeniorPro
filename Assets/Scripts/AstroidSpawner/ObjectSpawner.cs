@@ -35,7 +35,7 @@ public class ObjectSpawner : MonoBehaviour
             totalSpawned++;
         }
 
-        transform.Rotate(Vector3.up * Time.deltaTime * 1);
+        //transform.Rotate(Vector3.up * Time.deltaTime * 0.5f);
     }
 
     void OnDrawGizmos()
@@ -50,13 +50,15 @@ public class ObjectSpawner : MonoBehaviour
 
         int randIndex = Random.Range(0, objectToSpawn.Length);
         Vector3 spawnPosition = new Vector3(
-            Random.Range((-spawnAreaSize.x / 2)-1200, (spawnAreaSize.x / 2)+1200),
-            Random.Range(-spawnAreaSize.y / 2 , spawnAreaSize.y / 2),
-            Random.Range((-spawnAreaSize.z / 2) -1200, (spawnAreaSize.z / 2) +1200)
+            Random.Range((-spawnAreaSize.x / 2), (spawnAreaSize.x / 2)),
+            Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2),
+            Random.Range((-spawnAreaSize.z / 2), (spawnAreaSize.z / 2))
         ) + transform.position;
 
-        GameObject temp = Instantiate(objectToSpawn[randIndex], spawnPosition, Quaternion.identity);
+        GameObject temp = Instantiate(objectToSpawn[randIndex], spawnPosition, Random.rotation);
         temp.transform.parent = transform;
+        
+        temp.transform.localScale = Vector3.one * Random.Range(0.5f, 5f);
     }
     
     public void DestoryedAstroid(){

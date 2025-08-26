@@ -38,12 +38,7 @@ public class ObjectSpawner : MonoBehaviour
         //transform.Rotate(Vector3.up * Time.deltaTime * 0.5f);
     }
 
-    void OnDrawGizmos()
-    {
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, spawnAreaSize);
-    }
 
     void SpawnObject()
     {
@@ -57,11 +52,19 @@ public class ObjectSpawner : MonoBehaviour
 
         GameObject temp = Instantiate(objectToSpawn[randIndex], spawnPosition, Random.rotation);
         temp.transform.parent = transform;
-        
+
         temp.transform.localScale = Vector3.one * Random.Range(0.5f, 5f);
     }
-    
-    public void DestoryedAstroid(){
+
+    public void DestoryedAstroid()
+    {
         totalSpawned--;
+    }
+    
+        void OnDrawGizmos()
+    {
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, spawnAreaSize);
     }
 }

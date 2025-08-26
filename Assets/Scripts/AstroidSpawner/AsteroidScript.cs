@@ -8,26 +8,31 @@ public class AsteroidScript : MonoBehaviour
     public bool canSpawnResources = true;
     public float health = 10f;
 
-    public float minThrust = 0.5f;
+    public float minThrust = 0.1f;
     public float maxThrust = 0.5f;
+    public float minSpinSpeed = 1f;
+    public float maxSpinSpeed = 5f;
+    private float spinSpeed;
     private Rigidbody rb;
 
 
     void Start()
     {
+
         rb = GetComponent<Rigidbody>()!=null ? GetComponent<Rigidbody>() : gameObject.AddComponent<Rigidbody>();
         rb.useGravity = false;
 
 
+        spinSpeed = Random.Range(minSpinSpeed, maxSpinSpeed);
         float thrust = Random.Range(minThrust, maxThrust);
 
-         rb.AddForce(Vector3.forward * thrust, ForceMode.Impulse);
+         rb.AddForce(Vector3.forward * thrust , ForceMode.Impulse);
     }
 
 
     void Update()
     {
-
+        transform.Rotate(Vector3.up * spinSpeed * Time.deltaTime);
     }
 
     private void OnDeath()

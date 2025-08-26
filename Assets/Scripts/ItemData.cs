@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/ItemData")]
@@ -10,4 +11,6 @@ public class ItemData : ScriptableObject
     public Sprite image;
     public int maxStack = 20;
     public GameObject itemPrefab;
+
+    public ItemTypes.ItemUseType itemTypes;
 }

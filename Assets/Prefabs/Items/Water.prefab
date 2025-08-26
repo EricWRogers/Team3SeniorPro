@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerRestored: 0
-  thirstRestored: 0
+  thirstRestored: 20
   healthRestored: 0
   oxygenRestored: 0
 --- !u!114 &5036586187973250301
@@ -146,7 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: d9f9cd17bb5b98a44a014822d9484dae, type: 2}
-  itemObj: {fileID: 0}
 --- !u!136 &65797827860997864
 CapsuleCollider:
   m_ObjectHideFlags: 0

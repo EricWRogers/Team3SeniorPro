@@ -4,7 +4,7 @@ using UnityEngine;
 public class HotBarDisplay : StaticInventoryDisplay
 {
     private int m_maxIndexSize = 9;
-    private int m_currentIndex = 0;
+    protected int m_currentIndex = 0;
     private int m_currentItemID;
 
     public GameObject hand;
@@ -93,9 +93,35 @@ public class HotBarDisplay : StaticInventoryDisplay
         }
     }
 
-    private void UseItem()
+    public void UseItem()
     {
-        
+        if (m_currentItemID != -1)
+        {
+            if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemTypes == ItemTypes.ItemUseType.Consumable)
+            {
+                m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab.GetComponent<Consumable>().ConsumeItem();
+
+            }
+            if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemTypes == ItemTypes.ItemUseType.Placeable)
+            {
+                //m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab.GetComponent<Placeable>().PlaceItem();
+            }
+            if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemTypes == ItemTypes.ItemUseType.Throwable)
+            {
+                //m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab.GetComponent<Throwable>().ThrowItem();
+            }
+            if (m_slots[m_currentIndex].AssignedInvSlot.StackSize > 1)
+            {
+                int itemLeft = m_slots[m_currentIndex].AssignedInvSlot.StackSize - 1;
+                m_slots[m_currentIndex].AssignedInvSlot.UpdateInventorySlot(m_slots[m_currentIndex].AssignedInvSlot.ItemData, itemLeft);
+                PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+            }
+            else
+            {
+                m_slots[m_currentIndex].ClearSlot();
+                PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+            }
+        }
     }
 
     private void HoldItem()

@@ -33,10 +33,10 @@ public class AsteroidScript : MonoBehaviour
     void Update()
     {
         transform.Rotate(Vector3.up * spinSpeed * Time.deltaTime);
-        if (transform.position.magnitude - ObjectSpawner.instance.transform.position.magnitude > 300f)
+        if (transform.position.magnitude - ObjectSpawner.instance.transform.position.magnitude > 200f)
         {
-            transform.localScale = transform.localScale * 0.9f;
-            if (transform.localScale.x < 0.1f)
+            transform.localScale = transform.localScale * 0.999f;
+            if (transform.localScale.x < 0.5f)
             {
                 Destroy(gameObject);
                 ObjectSpawner.instance.DestoryedAstroid();

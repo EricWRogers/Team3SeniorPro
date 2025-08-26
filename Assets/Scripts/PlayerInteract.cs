@@ -71,7 +71,7 @@ public class PlayerInteract : MonoBehaviour
             hit.collider.GetComponent<InteractionScript>().Interacted.Invoke();
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab) && !playerMovement.lockedCursor)//if a interaction panel is open it will close it
+        if (Input.GetKeyDown(KeyCode.Tab) && !playerMovement.canMove)//if a interaction panel is open it will close it
         {
             ToggleCursor.Invoke();
         }
@@ -80,7 +80,7 @@ public class PlayerInteract : MonoBehaviour
 
     public void ChangeCursor()
     {
-        if (playerMovement.lockedCursor)
+        if (playerMovement.canMove)
         {
             DisableMovemnent();
         }
@@ -96,7 +96,7 @@ public class PlayerInteract : MonoBehaviour
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            playerMovement.lockedCursor = true;
+            playerMovement.canMove = true;
         }
     }
 
@@ -104,7 +104,7 @@ public class PlayerInteract : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        playerMovement.lockedCursor = false;
+        playerMovement.canMove = false;
     }
     
     private void OnDrawGizmos()

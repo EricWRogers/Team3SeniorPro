@@ -5,13 +5,16 @@ public class InventoryUIController : MonoBehaviour
     public DynamicInventoryDisplay inventoryPanel;
     public DynamicInventoryDisplay playerBackPack;
 
-    public GameObject InventoryBackground;
+    public GameObject inventoryBackground;
+
+    public GameObject craftingUI;
 
     void Awake()
     {
         inventoryPanel.gameObject.SetActive(false);
         playerBackPack.gameObject.SetActive(false);
-        InventoryBackground.SetActive(false);
+        inventoryBackground.SetActive(false);
+        craftingUI.SetActive(false);
     }
     void OnEnable()
     {
@@ -29,27 +32,15 @@ public class InventoryUIController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (InventoryBackground.activeInHierarchy)
-            {
-                InventoryBackground.SetActive(false);
-            }
-            if (inventoryPanel.gameObject.activeInHierarchy)//disables the inventory 
-            {
-                InventoryBackground.SetActive(false);
-            }
-            if (playerBackPack.gameObject.activeInHierarchy)//disables the inventory 
-            {
-                playerBackPack.gameObject.SetActive(false);
-            }
+            CloseAllDisplays();
         }
-
 
     }
 
     private void DisplayInventory(InventorySystem _invToDisplay, int _offset)
     {
         inventoryPanel.gameObject.SetActive(true);
-        InventoryBackground.SetActive(true);
+        inventoryBackground.SetActive(true);
         inventoryPanel.RefreshDynamicInventory(_invToDisplay, _offset);
     }
     private void DisplayPlayerInventory(InventorySystem _invToDisplay, int _offset)
@@ -59,7 +50,7 @@ public class InventoryUIController : MonoBehaviour
             playerBackPack.gameObject.SetActive(true);
         }
 
-        InventoryBackground.SetActive(true);
+        inventoryBackground.SetActive(true);
         playerBackPack.RefreshDynamicInventory(_invToDisplay, _offset);
     }
 
@@ -73,6 +64,21 @@ public class InventoryUIController : MonoBehaviour
         else if (inventoryPanel.gameObject.activeInHierarchy)
         {
             inventoryPanel.gameObject.SetActive(false);
+        }
+    }
+
+    public void CloseAllDisplays()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.activeInHierarchy)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+        if (inventoryBackground.gameObject.activeInHierarchy)
+        {
+            inventoryBackground.gameObject.SetActive(false);
         }
     }
 }

@@ -4,14 +4,26 @@ public class ObjectSpawner : MonoBehaviour
 {
     public GameObject[] objectToSpawn;
 
-    private GameObject[] pooledObjects;
+    public static ObjectSpawner instance;
+
     public int poolSize = 20;
     public float spawnInterval = 2f;
     private float nextSpawnTime;
-    public Vector3 spawnAreaSize = new Vector3(50f, 10f, 50f);
+    public Vector3 spawnAreaSize = new Vector3(50f, 20f, 50f);
 
     private int totalSpawned = 0;
-  
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
 
     void Update()
@@ -21,25 +33,33 @@ public class ObjectSpawner : MonoBehaviour
             SpawnObject();
             nextSpawnTime = Time.time + spawnInterval;
             totalSpawned++;
-            }
+        }
+
+        transform.Rotate(Vector3.up * Time.deltaTime * 1);
     }
 
     void OnDrawGizmos()
     {
-        
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, spawnAreaSize);
     }
 
-    void SpawnObject(){
+    void SpawnObject()
+    {
 
         int randIndex = Random.Range(0, objectToSpawn.Length);
         Vector3 spawnPosition = new Vector3(
-            Random.Range(-spawnAreaSize.x / 2, spawnAreaSize.x / 2),
-            Random.Range(-spawnAreaSize.y / 2, spawnAreaSize.y / 2),
-            Random.Range(-spawnAreaSize.z / 2, spawnAreaSize.z / 2)
+            Random.Range((-spawnAreaSize.x / 2)-1200, (spawnAreaSize.x / 2)+1200),
+            Random.Range(-spawnAreaSize.y / 2 , spawnAreaSize.y / 2),
+            Random.Range((-spawnAreaSize.z / 2) -1200, (spawnAreaSize.z / 2) +1200)
         ) + transform.position;
 
-        Instantiate(objectToSpawn[randIndex], spawnPosition, Quaternion.identity);
+        GameObject temp = Instantiate(objectToSpawn[randIndex], spawnPosition, Quaternion.identity);
+        temp.transform.parent = transform;
+    }
+    
+    public void DestoryedAstroid(){
+        totalSpawned--;
     }
 }

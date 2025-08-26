@@ -87,6 +87,10 @@ public class HotBarDisplay : StaticInventoryDisplay
         {
             SetSlot(9);
         }
+        if (m_slots[m_currentIndex].AssignedInvSlot.ItemData == null)
+        {
+            EmptyHand();
+        }
     }
 
     private void UseItem()
@@ -139,7 +143,13 @@ public class HotBarDisplay : StaticInventoryDisplay
 
     public void EmptyHand()
     {
-        if(hand.transform.childCount > 0)
-            Destroy(hand.transform.GetChild(0).gameObject);
+        if (hand.transform.childCount > 0)
+        {
+            for (int x = 0; x < hand.transform.childCount; x++)
+            {
+                Destroy(hand.transform.GetChild(x).gameObject);
+            }
+        }
+            
     }
 }

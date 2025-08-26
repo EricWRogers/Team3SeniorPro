@@ -43,6 +43,11 @@ public class PlayerManager : MonoBehaviour
         }
         PlayerDeath.AddListener(Death);
 
+        m_currentHealth = m_maxHealth;
+        m_currentHunger = m_maxHunger;
+        m_currentThirst = m_maxThirst;
+        currentOxygen = maxOxygen;
+
 
     }
 

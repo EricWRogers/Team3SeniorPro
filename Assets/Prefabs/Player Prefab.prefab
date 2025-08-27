@@ -139,8 +139,7 @@ MonoBehaviour:
   pitchSpeed: 50
   teatherAnchor: {fileID: 0}
   teatherMaxDistance: 50
-  teatherPullSpeed: 10
-  teatherMinDistance: 1
+  teatherMinDistance: 40
   teatherDampening: 0.5
 --- !u!54 &8752659305439134245
 Rigidbody:

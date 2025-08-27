@@ -26,12 +26,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Teather Settings")]
     [SerializeField] private Transform teatherAnchor;
     [SerializeField] private float teatherMaxDistance = 50f;
-    [SerializeField] private float teatherPullSpeed = 10f;
-    [SerializeField] private float teatherMinDistance = 1f; // Minimum distance before stopping
+    [SerializeField] private float teatherMinDistance = 40f; // Minimum distance before stopping
     [SerializeField] private float teatherDampening = 0.5f; // Slows down as you get closer
     private Vector3 teatherTarget; // Store the position we're tethering to
-    private bool isReturning = false; // Track if we're returning to base
-    private bool usingTeather = false; 
+    private bool usingTeather = true; 
     
 
 
@@ -57,32 +55,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (canMove)
         {
-            rb.isKinematic = false;
-            if (Input.GetKey(KeyCode.W))
-            {
-                rb.AddForce(transform.forward * speed);
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                rb.AddForce(-transform.forward * speed);
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                rb.AddForce(-transform.right * speed);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                rb.AddForce(transform.right * speed);
-            }
-            if (Input.GetKey(KeyCode.Space))
-            {
-                rb.AddForce(transform.up * speed);
-            }
-            if (Input.GetKey(KeyCode.LeftControl))
-            {
-                rb.AddForce(-transform.up * speed);
-            }
 
+            rb.isKinematic = false;
+            if (Input.GetKey(KeyCode.W)) rb.AddForce(transform.forward * speed);
+            if (Input.GetKey(KeyCode.S)) rb.AddForce(-transform.forward * speed);
+            if (Input.GetKey(KeyCode.A)) rb.AddForce(-transform.right * speed);
+            if (Input.GetKey(KeyCode.D)) rb.AddForce(transform.right * speed);
+            if (Input.GetKey(KeyCode.Space)) rb.AddForce(transform.up * speed);
+            if (Input.GetKey(KeyCode.LeftControl)) rb.AddForce(-transform.up * speed);
 
             if (Input.GetKey(KeyCode.V))
             {
@@ -97,6 +77,31 @@ public class PlayerMovement : MonoBehaviour
             }
 
 
+            if (usingTeather)
+        {        
+                    Vector3 directionToAnchor = teatherAnchor.position - transform.position;
+                    float distanceToAnchor = directionToAnchor.magnitude;
+
+                    if (distanceToAnchor > teatherMinDistance)
+                    {
+                        float dampingFactor = Mathf.Clamp01((distanceToAnchor - teatherMinDistance) / (teatherMaxDistance - teatherMinDistance));
+                        dampingFactor = 1f - Mathf.Pow(1f - dampingFactor, teatherDampening); // Apply exponential damping
+
+                        // Apply force toward the tether anchor
+                        Vector3 tetherForce = directionToAnchor.normalized * speed * dampingFactor;
+                        rb.AddForce(tetherForce);
+
+                        // Clamp position to max tether distance
+                        if (distanceToAnchor > teatherMaxDistance)
+                        {
+                            Vector3 clampedPosition = teatherAnchor.position - directionToAnchor.normalized * teatherMaxDistance;
+                            transform.position = clampedPosition;
+                        }
+                    }
+                
+            }
+
+ 
 
 
             if (rb.linearVelocity.magnitude > 0.001f)
@@ -121,36 +126,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (usingTeather)
-            {
-                float distanceToTarget = Vector3.Distance(transform.position, teatherTarget);
-
-                if (distanceToTarget > teatherMinDistance)
-                {
-                    Vector3 directionToAnchor = (teatherTarget - transform.position).normalized;
-
-                    // Calculate pull force based on distance
-                    float pullForce = teatherPullSpeed * (distanceToTarget / teatherMaxDistance);
-                    pullForce = Mathf.Clamp(pullForce, 0, teatherPullSpeed);
-
-                    // Apply dampening as we get closer
-                    pullForce *= (1 - (teatherDampening * (1 - distanceToTarget / teatherMaxDistance)));
-
-                    rb.AddForce(directionToAnchor * pullForce);
-
-                    // Optionally slow down existing velocity
-                    rb.linearVelocity *= 0.98f;
-                }
-                else
-                {
-                    // We've reached the target
-                    usingTeather = false;
-                    canMove = true;
-                    isReturning = false;
-                    rb.linearVelocity = Vector3.zero;
-                }
-                return;
-            }
 
             rb.isKinematic = true; // Disable physics when cursor is not locked
         }

@@ -129,10 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ce318fca379894a868805b5440be28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerRestored: 0
-  thirstRestored: 20
-  healthRestored: 0
-  oxygenRestored: 0
+  hungerPercentRestored: 0
+  thirstPercentRestored: 15
+  healthPercentRestored: 0
+  oxygenPercentRestored: 0
 --- !u!114 &5036586187973250301
 MonoBehaviour:
   m_ObjectHideFlags: 0

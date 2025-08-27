@@ -97,7 +97,7 @@ public class HotBarDisplay : StaticInventoryDisplay
     {
         if (m_currentItemID != -1)
         {
-            if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemTypes == ItemTypes.ItemUseType.Consumable)
+            if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemUseType == ItemData.ItemUseType.Consumable)
             {
                 m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab.GetComponent<Consumable>().ConsumeItem();
                 if (m_slots[m_currentIndex].AssignedInvSlot.StackSize > 1)
@@ -113,7 +113,7 @@ public class HotBarDisplay : StaticInventoryDisplay
             }
 
             }
-            if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemTypes == ItemTypes.ItemUseType.Placeable)
+            else if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemUseType == ItemData.ItemUseType.Placeable)
             {
                 //m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab.GetComponent<Placeable>().PlaceItem();
                 if (m_slots[m_currentIndex].AssignedInvSlot.StackSize > 1)
@@ -128,7 +128,7 @@ public class HotBarDisplay : StaticInventoryDisplay
                     PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
                 }
             }
-            if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemTypes == ItemTypes.ItemUseType.Throwable)
+            else if (m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemUseType == ItemData.ItemUseType.Throwable)
             {
                 //m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab.GetComponent<Throwable>().ThrowItem();
                 if (m_slots[m_currentIndex].AssignedInvSlot.StackSize > 1)

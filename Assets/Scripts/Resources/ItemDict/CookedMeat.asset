@@ -18,4 +18,4 @@ MonoBehaviour:
   image: {fileID: 0}
   maxStack: 20
   itemPrefab: {fileID: 0}
-  itemTypes: 3
+  itemUseType: 3

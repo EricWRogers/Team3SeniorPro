@@ -12,5 +12,7 @@ public class ItemData : ScriptableObject
     public int maxStack = 20;
     public GameObject itemPrefab;
 
-    public ItemTypes.ItemUseType itemTypes;
+    public enum ItemUseType { NoUse, Placeable, Throwable, Consumable} ;
+
+    public ItemUseType itemUseType;
 }

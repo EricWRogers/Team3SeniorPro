@@ -76,22 +76,24 @@ public class PlayerMovement : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.Space))
             {
-                rb.AddForce(Vector3.up * speed);
+                rb.AddForce(transform.up * speed);
             }
             if (Input.GetKey(KeyCode.LeftControl))
             {
-                rb.AddForce(-Vector3.up * speed);
+                rb.AddForce(-transform.up * speed);
             }
 
 
             if (Input.GetKey(KeyCode.V))
             {
-                zRotation += pitchSpeed * Time.deltaTime;
+                //zRotation += pitchSpeed * Time.deltaTime;
+                transform.Rotate(Vector3.forward * pitchSpeed * Time.deltaTime, Space.Self);
             }
 
             if (Input.GetKey(KeyCode.B))
             {
-                zRotation -= pitchSpeed * Time.deltaTime;
+                transform.Rotate(-Vector3.forward * pitchSpeed * Time.deltaTime, Space.Self);
+                //zRotation -= pitchSpeed * Time.deltaTime;
             }
 
 
@@ -109,7 +111,11 @@ public class PlayerMovement : MonoBehaviour
             yRotation += mouseX;
             xRotation -= mouseY;
             //xRotation = Mathf.Clamp(xRotation, -90f, 90f); clamps vertical look
-            transform.localRotation = Quaternion.Euler(xRotation, yRotation, zRotation);
+            transform.Rotate(Vector3.up, mouseX, Space.Self);
+            transform.Rotate(Vector3.right, -mouseY, Space.Self);
+
+
+            //transform.localRotation = Quaternion.Euler(xRotation, yRotation, zRotation);
 
 
         }
@@ -117,33 +123,33 @@ public class PlayerMovement : MonoBehaviour
         {
             if (usingTeather)
             {
-                 float distanceToTarget = Vector3.Distance(transform.position, teatherTarget);
-        
+                float distanceToTarget = Vector3.Distance(transform.position, teatherTarget);
+
                 if (distanceToTarget > teatherMinDistance)
                 {
                     Vector3 directionToAnchor = (teatherTarget - transform.position).normalized;
-                    
+
                     // Calculate pull force based on distance
                     float pullForce = teatherPullSpeed * (distanceToTarget / teatherMaxDistance);
                     pullForce = Mathf.Clamp(pullForce, 0, teatherPullSpeed);
-                    
+
                     // Apply dampening as we get closer
-                    pullForce *= (1 - (teatherDampening * (1 - distanceToTarget/teatherMaxDistance)));
-                    
+                    pullForce *= (1 - (teatherDampening * (1 - distanceToTarget / teatherMaxDistance)));
+
                     rb.AddForce(directionToAnchor * pullForce);
-                    
+
                     // Optionally slow down existing velocity
                     rb.linearVelocity *= 0.98f;
                 }
-        else
-        {
-            // We've reached the target
-            usingTeather = false;
-            canMove = true;
-            isReturning = false;
-            rb.linearVelocity = Vector3.zero;
-        }
-        return;
+                else
+                {
+                    // We've reached the target
+                    usingTeather = false;
+                    canMove = true;
+                    isReturning = false;
+                    rb.linearVelocity = Vector3.zero;
+                }
+                return;
             }
 
             rb.isKinematic = true; // Disable physics when cursor is not locked

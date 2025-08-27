@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CraftingScript : MonoBehaviour
+public class RepairScript : MonoBehaviour
 {
-    public Recipes recipes;
     private PlayerInventoryHolder m_playerInventory;
     private int m_itemCounter;
 
@@ -12,10 +11,10 @@ public class CraftingScript : MonoBehaviour
     {
         m_playerInventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventoryHolder>();
     }
-    public void Craft(Recipes _recipe)
+    public bool TryRepair(List<ItemData> _itemsNeedToRepair)
     {
-        //Debug.Log(CheckForingredints(_recipe, out List<InventorySlot> invSlots, out List<ItemData> distinctItemList, out Dictionary<ItemData, int> itemAmounts));
-        if (CheckForingredints(_recipe, out List<InventorySlot> _invSlots, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts))
+        Debug.Log("try to repair");
+        if (CheckForItemsinInventory(_itemsNeedToRepair, out List<InventorySlot> _invSlots, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts))
         {
             if (_invSlots.Count == 1)
             {
@@ -30,7 +29,6 @@ public class CraftingScript : MonoBehaviour
                     _invSlots[0].ClearSlot();
                     PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
                 }
-                m_playerInventory.AddToInventory(_recipe.outcome, _recipe.amountOfOutcome);
             }
             else if (_invSlots.Count > 1)
             {
@@ -49,35 +47,39 @@ public class CraftingScript : MonoBehaviour
                         PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
                     }
                 }
-                m_playerInventory.AddToInventory(_recipe.outcome, _recipe.amountOfOutcome);
             }
+            return true;
 
         }
+        else return false;
 
 
     }
 
-    public bool CheckForingredints(Recipes _recipeToCheck, out List<InventorySlot> _invSlot, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts)
+    public bool CheckForItemsinInventory(List<ItemData> _itemsToCheckFor, out List<InventorySlot> _invSlot, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts)
     {
-        _distinctItemList = _recipeToCheck.recipe.Distinct<ItemData>().ToList();
+        _distinctItemList = _itemsToCheckFor.Distinct<ItemData>().ToList();
         _itemAmounts = new();
         _invSlot = new();
         Dictionary<ItemData, int> checker = new();
 
         foreach (ItemData item in _distinctItemList)
         {
-            //Debug.Log($"added {GetNumOfItem(_recipeToCheck.recipe, item)} {item} to _itemAmounts");
-            _itemAmounts.Add(item, GetNumOfItem(_recipeToCheck.recipe, item));
+            Debug.Log($"added {GetNumOfItem(_itemsToCheckFor, item)} {item} to _itemAmounts");
+            _itemAmounts.Add(item, GetNumOfItem(_itemsToCheckFor, item));
         }
         foreach (ItemData item in _distinctItemList)
         {
             checker.Add(item, 0);
             for (int x = m_playerInventory.PrimaryInventorySystem.inventorySize - 1; x > -1; x--)
             {
+                Debug.Log($"inventory slot item {m_playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData} with {m_playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize}");
                 if (checker[item] < _itemAmounts[item])
                 {
+                    //Debug.Log($"checker has {checker[item]} {item} and itemAmounts has {_itemAmounts[item]} {item} {m_playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData.id} {item.id}");
                     if (m_playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData == item)
                     {
+                        Debug.Log("1");
                         _invSlot.Add(m_playerInventory.PrimaryInventorySystem.InventorySlots[x]);
                         checker[item] += m_playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize;
                         //Debug.Log($"the checker has {checker[item]} {item} and you need {_itemAmounts[item]} {item}");

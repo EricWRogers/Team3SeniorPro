@@ -17,5 +17,5 @@ MonoBehaviour:
   description: A tasty piece of meat from an alien lifeform. hopfully its edible.
   image: {fileID: 0}
   maxStack: 20
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 7808023696924138935, guid: 4b4afd6d046fe2f4ca898c25320bdbbe, type: 3}
   itemUseType: 3

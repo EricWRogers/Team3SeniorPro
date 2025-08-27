@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outcome: {fileID: 11400000, guid: 46dc8874af2f76f419ae781a0348634b, type: 2}
   recipe:
-  - {fileID: 11400000, guid: 46dc8874af2f76f419ae781a0348634b, type: 2}
-  amountOfOutcome: 1
+  - {fileID: 11400000, guid: 94e0852d710b9c147876dea51616e1b0, type: 2}
+  amountOfOutcome: 22

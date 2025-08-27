@@ -4,13 +4,14 @@ using UnityEngine;
 public class WorkStations : MonoBehaviour
 {
     public InventoryUIController UIController;
-    private CraftingScript m_craftingScript;
+    private RepairScript m_repairScript;
     private PlayerInteract m_playerInteract;
     public bool isBroke = false;
-    public List<ItemData> itemsNeedToRepair;
+    public List<ItemData> itemsNeedToRepair = new();
     void Awake()
     {
         m_playerInteract = GameObject.FindWithTag("Player").GetComponent<PlayerInteract>();
+        m_repairScript = gameObject.GetComponent<RepairScript>();
     }
 
     public void InteractWithWorkStation()
@@ -27,9 +28,10 @@ public class WorkStations : MonoBehaviour
             }
             m_playerInteract.ChangeCursor();
         }
-        else
+        else if(isBroke)
         {
-            if (m_craftingScript.TryRepair(itemsNeedToRepair))
+            Debug.Log("is broke");
+            if (m_repairScript.TryRepair(itemsNeedToRepair))
             {
                 Debug.Log("repaired");
                 isBroke = false;

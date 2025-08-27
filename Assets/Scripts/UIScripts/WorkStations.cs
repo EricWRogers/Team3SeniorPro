@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WorkStations : MonoBehaviour
@@ -8,6 +9,7 @@ public class WorkStations : MonoBehaviour
     private PlayerInteract m_playerInteract;
     public bool isBroke = false;
     public List<ItemData> itemsNeedToRepair = new();
+    public TextMeshProUGUI missingItemsText;
     void Awake()
     {
         m_playerInteract = GameObject.FindWithTag("Player").GetComponent<PlayerInteract>();
@@ -31,14 +33,19 @@ public class WorkStations : MonoBehaviour
         else if(isBroke)
         {
             Debug.Log("is broke");
-            if (m_repairScript.TryRepair(itemsNeedToRepair))
+            if (m_repairScript.TryRepair(itemsNeedToRepair, out List<ItemData> distinctItemList))
             {
                 Debug.Log("repaired");
                 isBroke = false;
             }
             else
             {
-                Debug.Log("missing items to repair");
+                missingItemsText.text = "";
+                foreach (ItemData item in distinctItemList)
+                {
+                    missingItemsText.text = item.displayName.ToString() + " x" + m_repairScript.GetNumOfItem(itemsNeedToRepair, item).ToString();
+                    missingItemsText.GetComponent<TextFade>().ResetFade();
+                }
             }
         }
 

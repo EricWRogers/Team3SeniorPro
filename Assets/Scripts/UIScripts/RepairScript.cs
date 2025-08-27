@@ -11,9 +11,10 @@ public class RepairScript : MonoBehaviour
     {
         m_playerInventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventoryHolder>();
     }
-    public bool TryRepair(List<ItemData> _itemsNeedToRepair)
+    public bool TryRepair(List<ItemData> _itemsNeedToRepair, out List<ItemData> distinctItemList)
     {
         Debug.Log("try to repair");
+        distinctItemList = _itemsNeedToRepair.Distinct<ItemData>().ToList();
         if (CheckForItemsinInventory(_itemsNeedToRepair, out List<InventorySlot> _invSlots, out List<ItemData> _distinctItemList, out Dictionary<ItemData, int> _itemAmounts))
         {
             if (_invSlots.Count == 1)

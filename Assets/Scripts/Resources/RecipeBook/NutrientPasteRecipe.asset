@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fafc67c12b8ed4aada747f5bb59ace, type: 3}
+  m_Name: NutrientPasteRecipe
+  m_EditorClassIdentifier: 
+  outcome: {fileID: 11400000, guid: c17378ea0fa815b4e88ee4c081a840bc, type: 2}
+  recipe:
+  - {fileID: 11400000, guid: 599c460ee0678c94dae5caaebe31457a, type: 2}
+  amountOfOutcome: 1

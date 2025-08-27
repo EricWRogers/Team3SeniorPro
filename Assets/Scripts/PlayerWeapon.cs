@@ -8,6 +8,9 @@ public class PlayerWeapon : MonoBehaviour
     public float fireRate = 1f;
     public float miningDamage = 1f;
     public bool miningGunActive = true;
+    public GameObject miningBeam;
+    public LayerMask layerMask;
+    private MiningBeamVisual m_miningBeamVisual;
 
     [Header("Shooting Gun Settings")]
     public float fireRateShooting = 1f;
@@ -21,7 +24,7 @@ public class PlayerWeapon : MonoBehaviour
 
     void Start()
     {
-        
+        m_miningBeamVisual = miningBeam.GetComponent<MiningBeamVisual>();
     }
 
     // Update is called once per frame
@@ -29,19 +32,23 @@ public class PlayerWeapon : MonoBehaviour
     {
         
         time += Time.deltaTime;
-        if (miningGunActive){
+        if (miningGunActive)
+        {
             if (time >= 1f / fireRate && Input.GetMouseButton(0))
             {
+                miningBeam.SetActive(true);
+                //m_miningBeamVisual.ChangeScale(new Vector3(miningBeam.transform.localScale.x, minningRange, miningBeam.transform.localScale.z), new Vector3(miningBeam.transform.localPosition.x, minningRange + .5f, miningBeam.transform.localPosition.z));
                 if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit, minningRange))
                 {
                     if (hit.collider.CompareTag("Mineable") && Input.GetMouseButton(0))
                     {
-                        hit.collider.GetComponent<AsteroidScript>().TakeDamage(miningDamage);
-                         time = 0f;
+                        hit.collider.GetComponent<ResourceNode>().TakeDamage(miningDamage);
+                        time = 0f;
                     }
                 }
 
             }
+            else if (!Input.GetMouseButton(0)) miningBeam.SetActive(false);
         }
         if(!miningGunActive && time >= 1f / fireRateShooting && Input.GetMouseButton(0))
         {

@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
     [Header("Oxygen")]
     [SerializeField] private float maxOxygen = 100;
     [SerializeField] private float oxygenDecayRate = 0.5f;
-    public bool usingOxygen = false;
+    public bool usingOxygen = true;
     private float currentOxygen;
     public float currentOxygenPercentage => currentOxygen / maxOxygen;
 

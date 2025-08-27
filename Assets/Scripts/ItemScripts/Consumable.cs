@@ -15,11 +15,10 @@ public class Consumable : MonoBehaviour
     }
     public void ConsumeItem()
     {
-        PlayerManager player = GameObject.FindWithTag("Player").GetComponent<PlayerManager>();
-        player.Eat(hungerPercentRestored);
-        player.Drink(thirstPercentRestored );
-        player.OxygenFill(oxygenPercentRestored);
-        player.Heal(healthPercentRestored);
+        PlayerManager.instance.Eat(hungerPercentRestored);
+        PlayerManager.instance.Drink(thirstPercentRestored );
+        PlayerManager.instance.OxygenFill(oxygenPercentRestored);
+        PlayerManager.instance.Heal(healthPercentRestored);
 
     }
 }

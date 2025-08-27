@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class PlayerStatsUI : MonoBehaviour
 {
-    public Slider healthBar;
-    public Slider hungerBar;
-    public Slider thirstBar;
-    public Slider oxygenBar;
+    public StatCircleDisplay healthBar;
+    public StatCircleDisplay hungerBar;
+    public StatCircleDisplay thirstBar;
+    public StatCircleDisplay oxygenBar;
 
     void Start()
     {
@@ -16,9 +16,9 @@ public class PlayerStatsUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthBar.value = PlayerManager.instance.currentHealthPercentage;
-        hungerBar.value = PlayerManager.instance.currentHungerPercentage;
-        thirstBar.value = PlayerManager.instance.currentThirstPercentage;
+        healthBar.curStat = PlayerManager.instance.currentHealthPercentage;
+        hungerBar.curStat = PlayerManager.instance.currentHungerPercentage;
+        thirstBar.curStat = PlayerManager.instance.currentThirstPercentage;
         //oxygenBar.value = PlayerManager.instance.currentOxygenPercentage;
     }
 }

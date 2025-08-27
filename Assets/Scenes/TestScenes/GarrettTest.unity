@@ -1568,30 +1568,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 757392940976356738, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 757392940976356738, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 757392940976356738, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 757392940976356738, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 831677541509857414, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 11400000, guid: bfc46d4dd6224614eade3c9a7e49180d, type: 2}
-    - target: {fileID: 831677541509857414, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: Recipes, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 2080402508950964042, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1656,10 +1632,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5868127686902436298, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
-      propertyPath: outcome
-      value: 
-      objectReference: {fileID: 11400000, guid: bfc46d4dd6224614eade3c9a7e49180d, type: 2}
     - target: {fileID: 6138601913635667408, guid: 61c70a50f449692469c9fee6bbb267cb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

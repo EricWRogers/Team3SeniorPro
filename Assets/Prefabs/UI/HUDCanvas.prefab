@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d08e9842dd305468d5ecfbc44647dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipe: {fileID: 11400000, guid: d9f9cd17bb5b98a44a014822d9484dae, type: 2}
+  outcome: {fileID: 11400000, guid: bfc46d4dd6224614eade3c9a7e49180d, type: 2}
 --- !u!114 &831677541509857414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,8 +555,8 @@ MonoBehaviour:
         m_MethodName: Craft
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 5868127686902436298}
-          m_ObjectArgumentAssemblyTypeName: RecipeRef, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: bfc46d4dd6224614eade3c9a7e49180d, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Recipes, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -967,7 +967,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipes: {fileID: 11400000, guid: bfc46d4dd6224614eade3c9a7e49180d, type: 2}
-  m_requiredItems: []
   playerInventory: {fileID: 0}
 --- !u!1 &7055756054247174608
 GameObject:

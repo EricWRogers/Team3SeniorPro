@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Consumable : MonoBehaviour
 {
-    public float hungerRestored;
-    public float thirstRestored;
-    public float healthRestored;
-    public float oxygenRestored;
+    public float hungerPercentRestored;
+    public float thirstPercentRestored;
+    public float healthPercentRestored;
+    public float oxygenPercentRestored;
 
     // Update is called once per frame
     void Update()
@@ -16,10 +16,10 @@ public class Consumable : MonoBehaviour
     public void ConsumeItem()
     {
         PlayerManager player = GameObject.FindWithTag("Player").GetComponent<PlayerManager>();
-        player.Eat(hungerRestored);
-        player.Drink(thirstRestored);
-        player.OxygenFill(oxygenRestored);
-        player.Heal(healthRestored);
+        player.Eat(hungerPercentRestored / 100);
+        player.Drink(thirstPercentRestored / 100);
+        player.OxygenFill(oxygenPercentRestored / 100);
+        player.Heal(healthPercentRestored / 100);
 
     }
 }

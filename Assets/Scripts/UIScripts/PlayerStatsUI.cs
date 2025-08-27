@@ -19,6 +19,6 @@ public class PlayerStatsUI : MonoBehaviour
         healthBar.curStat = PlayerManager.instance.currentHealthPercentage;
         hungerBar.curStat = PlayerManager.instance.currentHungerPercentage;
         thirstBar.curStat = PlayerManager.instance.currentThirstPercentage;
-        //oxygenBar.value = PlayerManager.instance.currentOxygenPercentage;
+        oxygenBar.curStat = PlayerManager.instance.currentOxygenPercentage;
     }
 }

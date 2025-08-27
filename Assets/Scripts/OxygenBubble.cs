@@ -14,18 +14,18 @@ public class OxygenBubble : MonoBehaviour
     {
 
     }
-    void OnCollisionStay(Collision collision)
+    void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             PlayerManager.instance.usingOxygen = false;
             PlayerManager.instance.OxygenFill(oxygenFillRate);
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             PlayerManager.instance.usingOxygen = true;
         }

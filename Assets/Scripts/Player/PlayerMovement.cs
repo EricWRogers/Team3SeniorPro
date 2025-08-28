@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     public float minGroundDistance = 2f;
     public bool usingGravBoots = false;
     private Transform gravityObject;
+    private Quaternion surfaceAlignedRotation;
+    private float currentYaw = 0f;
 
 
 
@@ -131,12 +133,38 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
-
+                 Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
                 rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
 
+                // Calculate base rotation aligned with surface
+                surfaceAlignedRotation = Quaternion.FromToRotation(Vector3.up, gravityDirection) * Quaternion.Euler(0, currentYaw, 0);
+
+                // Update yaw based on mouse input
+                currentYaw += mouseX;
+
+                // Calculate pitch rotation
+                xRotation -= mouseY;
+                xRotation = Mathf.Clamp(xRotation, -70f, 70f);
+
+                // Combine surface alignment with pitch and yaw
+                Quaternion finalRotation = surfaceAlignedRotation * Quaternion.Euler(xRotation, 0, 0);
+
+                // Apply smooth rotation
+                transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 50f);
+
+
+
+                /*
+                //Keeps you on the ground
+                Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
+                rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
+
+
+
+                // Gravity aligned rotation
                 Quaternion targetRotation = Quaternion.FromToRotation(transform.up, gravityDirection) * transform.rotation;
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 50f);
+                */
             }
 
         }

@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BasicMeleeAi : MonoBehaviour
 {
 
     public float speed = 5;
+    public List<GameObject> itemsToDrop;
 
     void Start()
     {
@@ -27,5 +29,14 @@ public class BasicMeleeAi : MonoBehaviour
         transform.position += dir.normalized * speed * Time.deltaTime;
 
 
+    }
+    public void OnDeath()
+    {
+        if (itemsToDrop.Count > 0)
+        {
+            int itemIndex = Random.Range(0, itemsToDrop.Count);
+            Instantiate(itemsToDrop[itemIndex], transform.position, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 }

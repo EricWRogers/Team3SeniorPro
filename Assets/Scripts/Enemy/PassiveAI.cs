@@ -1,15 +1,18 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PassiveAI : MonoBehaviour
 {
     public Vector3 rommingArea = new Vector3(30, 10, 30);
+
+    public List<GameObject> itemsToDrop;
     public float speed = 5;
     private bool targetSet = false;
     private Vector3 target;
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -31,5 +34,16 @@ public class PassiveAI : MonoBehaviour
         {
             targetSet = false;
         }
+    }
+
+
+    public void OnDeath()
+    {
+        if (itemsToDrop.Count > 0)
+        {
+            int itemIndex = Random.Range(0, itemsToDrop.Count);
+            Instantiate(itemsToDrop[itemIndex], transform.position, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 }

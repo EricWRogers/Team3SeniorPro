@@ -10,7 +10,7 @@ public class PlayerWeapon : MonoBehaviour
     public bool miningGunActive = true;
     public GameObject miningBeam;
     public LayerMask layerMask;
-    private MiningBeamVisual m_miningBeamVisual;
+    private LineRenderer m_miningBeamVisual;
 
     [Header("Shooting Gun Settings")]
     public float fireRateShooting = 1f;
@@ -24,7 +24,8 @@ public class PlayerWeapon : MonoBehaviour
 
     void Start()
     {
-        m_miningBeamVisual = miningBeam.GetComponent<MiningBeamVisual>();
+        m_miningBeamVisual = gameObject.GetComponent<LineRenderer>();
+        m_miningBeamVisual.enabled = false;
     }
 
     // Update is called once per frame
@@ -36,19 +37,26 @@ public class PlayerWeapon : MonoBehaviour
         {
             if (time >= 1f / fireRate && Input.GetMouseButton(0))
             {
-                miningBeam.SetActive(true);
-                //m_miningBeamVisual.ChangeScale(new Vector3(miningBeam.transform.localScale.x, minningRange, miningBeam.transform.localScale.z), new Vector3(miningBeam.transform.localPosition.x, minningRange + .5f, miningBeam.transform.localPosition.z));
-                if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit, minningRange))
+                if (Physics.Raycast(new Ray(firePoint.position, transform.forward), out RaycastHit hit, minningRange))
                 {
+                    m_miningBeamVisual.enabled = true;
+                    m_miningBeamVisual.SetPosition(0, firePoint.position);
+                    m_miningBeamVisual.SetPosition(1, hit.point);
                     if (hit.collider.CompareTag("Mineable") && Input.GetMouseButton(0))
                     {
                         hit.collider.GetComponent<ResourceNode>().TakeDamage(miningDamage);
                         time = 0f;
                     }
                 }
+                else
+                {
+                    m_miningBeamVisual.enabled = true;
+                    m_miningBeamVisual.SetPosition(0, firePoint.position);
+                    m_miningBeamVisual.SetPosition(1, firePoint.position + transform.forward * minningRange);
+                }
 
             }
-            else if (!Input.GetMouseButton(0)) miningBeam.SetActive(false);
+            else if (!Input.GetMouseButton(0)) m_miningBeamVisual.enabled = false;
         }
         if(!miningGunActive && time >= 1f / fireRateShooting && Input.GetMouseButton(0))
         {

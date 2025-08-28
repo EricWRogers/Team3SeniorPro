@@ -1,8 +1,7 @@
 using UnityEngine;
 
 public class MiningBeamVisual : MonoBehaviour
-{
-    void Start()
+{    void Start()
     {
         gameObject.SetActive(false);
     }

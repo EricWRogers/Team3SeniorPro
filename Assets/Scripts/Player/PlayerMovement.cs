@@ -34,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 teatherTarget; // Store the position we're tethering to
     private bool usingTeather = true;
 
+    [Header("Grav Boots")]
+    public float gravBootsForce = 10f;
+    public float minGroundDistance = 2f;
+    public bool usingGravBoots = false;
+    private Transform gravityObject;
 
 
 
@@ -66,6 +71,12 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.D)) rb.AddForce(transform.right * speed);
             if (Input.GetKey(KeyCode.Space)) rb.AddForce(transform.up * speed);
             if (Input.GetKey(KeyCode.LeftControl)) rb.AddForce(-transform.up * speed);
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                usingGravBoots = !usingGravBoots;
+                if(usingGravBoots) CheckGravBoots(); 
+
+            }    
             if (Input.GetKey(KeyCode.V))
             {
                 //zRotation += pitchSpeed * Time.deltaTime;
@@ -80,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Vector3 directionToAnchor = teatherAnchor.position - transform.position;
                 float distanceToAnchor = directionToAnchor.magnitude;
-                
+
                 //Teather line rednering
                 teatherLine.enabled = true;
                 teatherLine.startWidth = teatherWidth;
@@ -111,16 +122,43 @@ public class PlayerMovement : MonoBehaviour
             }
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-            yRotation += mouseX;
-            xRotation -= mouseY;
-            //xRotation = Mathf.Clamp(xRotation, -90f, 90f); clamps vertical look
-            transform.Rotate(Vector3.up, mouseX, Space.Self);
-            transform.Rotate(Vector3.right, -mouseY, Space.Self);
-            //transform.localRotation = Quaternion.Euler(xRotation, yRotation, zRotation);
+
+            if (!usingGravBoots)
+            {
+                // Normal space rotation
+                transform.Rotate(Vector3.up, mouseX, Space.Self);
+                transform.Rotate(Vector3.right, -mouseY, Space.Self);
+            }
+            else
+            {
+                Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
+
+                rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
+
+                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, gravityDirection) * transform.rotation;
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 50f);
+            }
+
         }
         else
         {
             rb.isKinematic = true; // Disable physics when cursor is not locked
+        }
+    }
+    
+
+    void CheckGravBoots()
+    {
+        RaycastHit hit;
+        if (Physics.SphereCast(transform.position, 0.5f, -transform.up, out hit, minGroundDistance))
+        {
+            gravityObject = hit.transform.gameObject.transform;
+
+
+    }
+        else
+        {
+            usingGravBoots = false;
         }
     }
 }

@@ -21,7 +21,6 @@ public class PassiveAI : MonoBehaviour
         {
             target = transform.position + new Vector3(Random.Range(-rommingArea.x, rommingArea.x), Random.Range(-rommingArea.y, rommingArea.y), Random.Range(-rommingArea.z, rommingArea.z));
             targetSet = true;
-            Invoke("ResetTarget", Random.Range(2, 5));
         }
 
         if (Physics.Raycast(transform.position, (target - transform.position).normalized, out RaycastHit hit, 2f))

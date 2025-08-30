@@ -657,6 +657,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 276d8a714592cd64e8222ef8838e6c5e, type: 3}
+--- !u!1 &498845475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 15393164039005446, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+  m_PrefabInstance: {fileID: 897276212}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &584318493 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2214223939493083704, guid: a33e6eccd9ce0324e870c9d2a6b4f084, type: 3}
@@ -1270,7 +1275,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6617034525190088381, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1014676152}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 15393164039005446, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1759603666}
   m_SourcePrefab: {fileID: 100100000, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
 --- !u!1 &1014676151
 GameObject:
@@ -2477,12 +2485,37 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 671346853922878432, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
   m_PrefabInstance: {fileID: 897276212}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 498845475}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c17a9e951a0ef85e1ac36d7884e65cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!145 &1759603666
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498845475}
+  serializedVersion: 3
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_Spring: 0
+  m_Damper: 0
+  m_MinDistance: 0
+  m_MaxDistance: 0
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 1
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1001 &1826591602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3512,10 +3545,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3721324807343700601, guid: cf7b0e338a4301f45b9b93788a0896cf, type: 3}
-      propertyPath: grapplePullSpeed
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 4319481420531346486, guid: cf7b0e338a4301f45b9b93788a0896cf, type: 3}
       propertyPath: m_Name
       value: GrappleHook
@@ -3526,11 +3555,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6810402725340829972, guid: cf7b0e338a4301f45b9b93788a0896cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6810402725340829972, guid: cf7b0e338a4301f45b9b93788a0896cf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6810402725340829972, guid: cf7b0e338a4301f45b9b93788a0896cf, type: 3}
       propertyPath: m_LocalRotation.w

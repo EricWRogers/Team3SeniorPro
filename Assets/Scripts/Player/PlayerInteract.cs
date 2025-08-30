@@ -106,7 +106,7 @@ public class PlayerInteract : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         playerMovement.canMove = false;
     }
-    
+    /*
     private void OnDrawGizmos()
     {
         if (lookingAtItem) Gizmos.color = Color.green;
@@ -114,4 +114,5 @@ public class PlayerInteract : MonoBehaviour
         else Gizmos.color = Color.red;
         Gizmos.DrawRay(startPos.position, startPos.forward * 2f);
     }
+    */
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2740383835666006689}
   - component: {fileID: 1530808727338589474}
   - component: {fileID: 4302458520860442972}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Biomass
   m_TagString: Item
   m_Icon: {fileID: 0}

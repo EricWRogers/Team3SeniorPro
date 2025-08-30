@@ -76,9 +76,9 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.C))
             {
                 usingGravBoots = !usingGravBoots;
-                if(usingGravBoots) CheckGravBoots(); 
+                if (usingGravBoots) CheckGravBoots();
 
-            }    
+            }
             if (Input.GetKey(KeyCode.V))
             {
                 //zRotation += pitchSpeed * Time.deltaTime;
@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                 Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
+                Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
                 rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
 
                 // Calculate base rotation aligned with surface
@@ -173,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
             rb.isKinematic = true; // Disable physics when cursor is not locked
         }
     }
-    
+
 
     void CheckGravBoots()
     {
@@ -183,11 +183,16 @@ public class PlayerMovement : MonoBehaviour
             gravityObject = hit.transform.gameObject.transform;
 
 
-    }
+        }
         else
         {
             usingGravBoots = false;
         }
+    }
+
+    public void PullToPos(Vector3 _pos, float _speed)
+    {
+        
     }
 }
     

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3101418891313356037}
   - component: {fileID: 4167767775634855701}
   - component: {fileID: 6661075824533944113}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NutrionPaste
   m_TagString: Item
   m_Icon: {fileID: 0}

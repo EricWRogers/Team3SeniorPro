@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7918170455610592325}
   - component: {fileID: 5017479182435250224}
   - component: {fileID: 7642633146053850361}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Leather
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9185507809204333315}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.03, y: -1.3100001, z: 0}
   m_LocalScale: {x: 0.4, y: 0.5, z: 0.1}
   m_ConstrainProportionsScale: 0

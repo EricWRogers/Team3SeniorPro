@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4335707005535899580}
   - component: {fileID: 4064238902127746128}
   - component: {fileID: 2917691926540542641}
-  - component: {fileID: 512749884909152340}
+  - component: {fileID: 7310482029773764519}
   m_Layer: 0
   m_Name: Agressive Mob
   m_TagString: Enemy
@@ -111,11 +111,23 @@ MonoBehaviour:
       m_Calls: []
   outOfHealth:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7310482029773764519}
+        m_TargetAssemblyTypeName: BasicMeleeAi, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   maxHealth: 100
   currentHealth: 0
   defaultToMaxHealth: 1
---- !u!114 &512749884909152340
+--- !u!114 &7310482029773764519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,9 +136,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9186637621029352937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11cda345e7ce2337f8684be1ddec1b00, type: 3}
+  m_Script: {fileID: 11500000, guid: 9863d9826dc672dcc89c644df9e63079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rommingArea: {x: 30, y: 10, z: 30}
-  itemsToDrop: []
   speed: 5
+  itemsToDrop:
+  - {fileID: 7663720535236508791, guid: f94749c39d68dda479cba16d76551a6e, type: 3}
+  - {fileID: 9185507809204333315, guid: aab8ed850dd18da41acf872634c1d844, type: 3}

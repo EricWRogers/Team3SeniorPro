@@ -150,6 +150,6 @@ MonoBehaviour:
       m_Calls: []
   mask:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 256
   tags:
   - Enemy

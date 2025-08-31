@@ -123,7 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rommingArea: {x: 30, y: 10, z: 30}
-  itemsToDrop: []
+  itemsToDrop:
+  - {fileID: 7663720535236508791, guid: f94749c39d68dda479cba16d76551a6e, type: 3}
+  - {fileID: 9185507809204333315, guid: aab8ed850dd18da41acf872634c1d844, type: 3}
   speed: 2
 --- !u!114 &4629304327777454649
 MonoBehaviour:
@@ -148,7 +150,19 @@ MonoBehaviour:
       m_Calls: []
   outOfHealth:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6722614884451618086}
+        m_TargetAssemblyTypeName: PassiveAI, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   maxHealth: 100
   currentHealth: 0
   defaultToMaxHealth: 1

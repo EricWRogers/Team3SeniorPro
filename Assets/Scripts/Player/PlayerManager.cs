@@ -35,6 +35,10 @@ public class PlayerManager : MonoBehaviour
     private float currentOxygen;
     public float currentOxygenPercentage => currentOxygen / maxOxygen;
 
+    [Header("General")]
+    public GameObject hand;
+    public ItemData heldItem;
+
     void Awake()
     {
         if (instance == null)
@@ -48,13 +52,14 @@ public class PlayerManager : MonoBehaviour
         m_currentThirst = m_maxThirst;
         currentOxygen = maxOxygen;
 
-
     }
 
     void Update()
     {
-
-        if(usingOxygen)
+        
+        if (hand.transform.childCount > 0)
+            heldItem = hand.transform.GetChild(0).GetComponent<ItemScript>().itemData;
+        if (usingOxygen)
         {
             currentOxygen -= oxygenDecayRate * Time.deltaTime;
             if (currentOxygen <= 0)
@@ -73,6 +78,8 @@ public class PlayerManager : MonoBehaviour
             m_currentHunger = 0;
             m_currentThirst = 0;
         }
+        
+
     }
 
 

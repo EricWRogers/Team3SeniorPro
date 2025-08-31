@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3721324807343700601}
   - component: {fileID: 2042530706768520902}
   - component: {fileID: 7852158864676216272}
+  - component: {fileID: 3336556845693829137}
   m_Layer: 0
   m_Name: GrappleHook
   m_TagString: Untagged
@@ -129,8 +130,10 @@ MonoBehaviour:
   - Mineable
   - Asteroid
   hookPos: {x: 0, y: 0, z: 0}
+  m_player: {fileID: 0}
   maxGrappleDistance: 20
   grapplePullSpeed: 10
+  rectractSpeed: 10
 --- !u!114 &2042530706768520902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,3 +180,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3336556845693829137
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4319481420531346486}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

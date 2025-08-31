@@ -20,14 +20,6 @@ public class PlayerWeapon : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
 
-    [Header("Grapple Hook Settings")]
-    
-    public float hookSpeed;
-    public float cooldown;
-    public float m_currentCooldown;
-    public GameObject hookPrefab;
-    private GameObject m_hook;
-    private bool m_hookedLaunched;
 
 
     float time;
@@ -45,71 +37,56 @@ public class PlayerWeapon : MonoBehaviour
         time += Time.deltaTime;
         bool miningRay = Physics.Raycast(new Ray(raycastStart.position, raycastStart.forward), out RaycastHit miningHit, minningRange);//raycast for mining
         bool ray = Physics.Raycast(new Ray(raycastStart.position, raycastStart.forward), out RaycastHit hit, raycastRange);//raycast for aiming
-
-        if (miningRay)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().heldItem == GetComponent<ItemScript>().itemData)
         {
-            if (miningGunActive)
+            if (miningRay)
             {
-                if (time >= 1f / fireRate && Input.GetMouseButton(0))
+                if (miningGunActive)
                 {
-                    m_miningBeamVisual.enabled = true;
-                    m_miningBeamVisual.SetPosition(0, firePoint.position);
-                    m_miningBeamVisual.SetPosition(1, miningHit.point);
-
-                    if (miningHit.collider.CompareTag("Mineable"))
+                    if (time >= 1f / fireRate && Input.GetMouseButton(0))
                     {
-                        miningHit.collider.GetComponent<ResourceNode>().TakeDamage(miningDamage);
-                        time = 0f;
+                        m_miningBeamVisual.enabled = true;
+                        m_miningBeamVisual.SetPosition(0, firePoint.position);
+                        m_miningBeamVisual.SetPosition(1, miningHit.point);
+
+                        if (miningHit.collider.CompareTag("Mineable"))
+                        {
+                            miningHit.collider.GetComponent<ResourceNode>().TakeDamage(miningDamage);
+                            time = 0f;
+                        }
                     }
                 }
             }
-        }
-        if (Input.GetMouseButton(0) && miningGunActive)
-        {
-            m_miningBeamVisual.enabled = true;
-            m_miningBeamVisual.SetPosition(0, firePoint.position);
-            m_miningBeamVisual.SetPosition(1, raycastStart.position + raycastStart.forward * minningRange);
-        }
-        else if (!Input.GetMouseButton(0))
-        {
-            m_miningBeamVisual.enabled = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            miningGunActive = !miningGunActive;
-            Debug.Log("Mining Gun Active: " + miningGunActive);
-        }
-
-
-        if (ray)
-            firePoint.transform.LookAt(hit.point);
-        else
-            firePoint.transform.LookAt(raycastStart.position + raycastStart.forward * minningRange);
-        if (!miningGunActive && time >= 1f / fireRateShooting && Input.GetMouseButton(0))
-        {
-            Shoot();
-            time = 0f;
-        }
-
-        if (m_currentCooldown > 0)
-        {
-            m_currentCooldown -= Time.deltaTime;
-        }
-        else
-        {
-            m_hookedLaunched = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q) && m_currentCooldown <= 0)
-        {
-            m_currentCooldown = cooldown;
-            if (!m_hookedLaunched)
+            if (Input.GetMouseButton(0) && miningGunActive)
             {
-                ShootGrapple();
+                m_miningBeamVisual.enabled = true;
+                m_miningBeamVisual.SetPosition(0, firePoint.position);
+                m_miningBeamVisual.SetPosition(1, raycastStart.position + raycastStart.forward * minningRange);
+            }
+            else if (!Input.GetMouseButton(0))
+            {
+                m_miningBeamVisual.enabled = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                miningGunActive = !miningGunActive;
+                Debug.Log("Mining Gun Active: " + miningGunActive);
+            }
+
+
+            if (ray)
+                firePoint.transform.LookAt(hit.point);
+            else
+                firePoint.transform.LookAt(raycastStart.position + raycastStart.forward * minningRange);
+            if (!miningGunActive && time >= 1f / fireRateShooting && Input.GetMouseButton(0))
+            {
+                Shoot();
+                time = 0f;
             }
         }
-
+        
+        
     }
 
     void Shoot()
@@ -123,24 +100,7 @@ public class PlayerWeapon : MonoBehaviour
         }
         Destroy(bullet, 2f); // Destroy the bullet after 2 seconds to prevent memory leaks
     }
-
-    public void ShootGrapple()
-    {
-        m_hookedLaunched = true;
-        m_hook = Instantiate(hookPrefab, firePoint.position, firePoint.rotation);
-        Rigidbody rb = m_hook.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.linearVelocity = firePoint.forward * hookSpeed;
-            rb.useGravity = false;
-        }
-    }
-
-    public void CancelGrapple()
-    {
-        
-    }
-
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;

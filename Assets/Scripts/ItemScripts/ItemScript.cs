@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class ItemPickUp : MonoBehaviour
+public class ItemScript : MonoBehaviour
 {
     public ItemData itemData;
+    public bool isSelectedInHotbar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

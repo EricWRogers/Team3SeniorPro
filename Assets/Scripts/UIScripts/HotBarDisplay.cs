@@ -152,6 +152,7 @@ public class HotBarDisplay : StaticInventoryDisplay
         GameObject item = Instantiate(m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab, hand.transform.position, hand.transform.rotation, hand.transform);
         item.GetComponent<Collider>().enabled = false;
         item.GetComponent<Rigidbody>().isKinematic = true;
+        item.GetComponent<ItemScript>().isSelectedInHotbar = true;
     }
 
     private void ChangeIndex(int _direction)
@@ -172,6 +173,11 @@ public class HotBarDisplay : StaticInventoryDisplay
         {
             HoldItem();
         }
+    }
+
+    public ItemData GetCurrentHeldItem()
+    {
+        return m_slots[m_currentIndex].AssignedInvSlot.ItemData;
     }
 
     private void SetSlot(int newIndex)

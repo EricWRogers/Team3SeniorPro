@@ -6,9 +6,10 @@ public class GrappleHook : Bullet
     [Header("Grapple Hook Settings")]
     public Vector3 hookPos;
     private Transform m_playerPos;
-    private GameObject m_player;
+    public GameObject m_player;
     public float maxGrappleDistance;
     public float grapplePullSpeed;
+    public float rectractSpeed;
     private bool m_retract = false;
     private bool m_isHooked = false;
 
@@ -30,10 +31,16 @@ public class GrappleHook : Bullet
         if (m_retract)
         {
             Retract();
+            if (m_isHooked)
+            {
+                speed = rectractSpeed;
+                GetComponent<Rigidbody>().isKinematic = false;
+                m_player.GetComponent<SpringJoint>().spring = 0;
+            }
+            
         }
-        if (Vector3.Distance(hookPos, m_playerPos.position) < 1)
+        if (Vector3.Distance(hookPos, m_playerPos.position) < 1 && (m_retract || m_isHooked))
         {
-            //m_player.GetComponent<Rigidbody>().AddForce(hookPos * -grapplePullSpeed, ForceMode.VelocityChange);
             m_player.GetComponent<SpringJoint>().spring = 0;
             m_isHooked = false;
             Destroy(this.gameObject);
@@ -48,7 +55,6 @@ public class GrappleHook : Bullet
         Debug.Log("pull Player");
         m_player.GetComponent<SpringJoint>().connectedAnchor = hookPos;
         m_player.GetComponent<SpringJoint>().spring = grapplePullSpeed;
-        //m_player.GetComponent<Rigidbody>().AddForce(hookPos * grapplePullSpeed, ForceMode.VelocityChange);
     }
     public void Hooked()
     {

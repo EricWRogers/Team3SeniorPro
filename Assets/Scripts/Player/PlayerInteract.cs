@@ -62,7 +62,7 @@ public class PlayerInteract : MonoBehaviour
         if (lookingAtItem && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Interacted with: " + hit.collider.name);
-            hit.collider.GetComponent<ItemPickUp>().Interact(inventoryHolder);
+            hit.collider.GetComponent<ItemScript>().Interact(inventoryHolder);
 
         }
         if (lookingAtInteractable && Input.GetKeyDown(KeyCode.E))

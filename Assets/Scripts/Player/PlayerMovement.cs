@@ -42,7 +42,15 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion surfaceAlignedRotation;
     private float currentYaw = 0f;
 
+    [Header("Grapple Hook Settings")]
 
+    public Transform grappleFirePoint;
+    public float hookSpeed;
+    public float cooldown;
+    public float m_currentCooldown;
+    public GameObject hookPrefab;
+    private GameObject m_hook;
+    private bool m_hookedLaunched;
 
 
     void Start()
@@ -172,6 +180,31 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.isKinematic = true; // Disable physics when cursor is not locked
         }
+
+        if (m_currentCooldown > 0)
+        {
+            m_currentCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            m_hookedLaunched = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if(m_hookedLaunched && m_hook != null) CancelGrapple();
+
+            if (m_currentCooldown <= 0)
+            {
+                m_currentCooldown = cooldown;
+                if (!m_hookedLaunched)
+                {
+                    ShootGrapple();
+                    m_hookedLaunched = true;
+                }
+            }
+            
+        }
     }
 
 
@@ -189,10 +222,25 @@ public class PlayerMovement : MonoBehaviour
             usingGravBoots = false;
         }
     }
-
-    public void PullToPos(Vector3 _pos, float _speed)
+    public void ShootGrapple()
     {
-        
+        Transform ray = Camera.main.transform;
+        if (Physics.Raycast(new Ray(ray.position, ray.forward), out RaycastHit hit, 30))
+            grappleFirePoint.transform.LookAt(hit.point);
+        else
+            grappleFirePoint.transform.LookAt(ray.position + ray.forward * 30);
+        m_hook = Instantiate(hookPrefab, grappleFirePoint.position, grappleFirePoint.rotation);
+        Rigidbody rb = m_hook.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = grappleFirePoint.forward * hookSpeed;
+            rb.useGravity = false;
+        }
+    }
+    public void CancelGrapple()
+    {
+        m_currentCooldown = 0;
+        m_hook.GetComponent<GrappleHook>().Retract();
     }
 }
     

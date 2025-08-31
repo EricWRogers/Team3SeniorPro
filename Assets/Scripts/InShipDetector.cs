@@ -10,12 +10,12 @@ public class InShipDetector : MonoBehaviour
         pm = GameObject.Find("Player").GetComponent<PlayerMovement>();
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         pm.insideShip = true;
     }
 
-    void Oit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         pm.insideShip = false;
     }

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1754995755822377952}
   - component: {fileID: 7533959293445168449}
   - component: {fileID: 1830035363863352689}
-  - component: {fileID: 6284714570170047533}
   - component: {fileID: 4781391838496610891}
+  - component: {fileID: 5540391804638934898}
+  - component: {fileID: 1315046994391928437}
   m_Layer: 2
   m_Name: OxygenBubble
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159381524302937157}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -88,8 +89,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6284714570170047533
-SphereCollider:
+--- !u!114 &4781391838496610891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159381524302937157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d6e47ae13768a4987c01c8b2cd2898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oxygenFillRate: 1
+--- !u!65 &5540391804638934898
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,9 +121,9 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4781391838496610891
+  m_Size: {x: 1.6180526, y: 0.7007833, z: 1.0489897}
+  m_Center: {x: -0.14048558, y: -0.11705418, z: -0.085314244}
+--- !u!114 &1315046994391928437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1159381524302937157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d6e47ae13768a4987c01c8b2cd2898, type: 3}
+  m_Script: {fileID: 11500000, guid: 380fc0e65ede12ccebc8191e0318f07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oxygenFillRate: 1
+  pm: {fileID: 0}

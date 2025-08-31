@@ -37,5 +37,6 @@ public class NodeSpawner : MonoBehaviour
     public void ResetTimer()
     {
         m_currentWait = waitTime;
+        canSpawnResourceNode = true;
     }
 }

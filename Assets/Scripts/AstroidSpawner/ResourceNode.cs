@@ -11,7 +11,8 @@ public class ResourceNode : MonoBehaviour
     {
         for (int i = 0; i < resourceCount; i++)
         {
-            Instantiate(ItemToSpawn.itemPrefab, transform.position, Quaternion.identity);
+            Vector3 offset = new Vector3(Random.Range(-.5f, .5f), Random.Range(-.5f, .5f), Random.Range(-.5f, .5f));
+            Instantiate(ItemToSpawn.itemPrefab, transform.position + offset, Quaternion.identity);
         }
         transform.GetComponentInParent<NodeSpawner>().canSpawnResourceNode = false;
         transform.GetComponentInParent<NodeSpawner>().ResetTimer();

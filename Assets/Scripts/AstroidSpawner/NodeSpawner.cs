@@ -8,11 +8,15 @@ public class NodeSpawner : MonoBehaviour
     private int m_randomInt;
     public float waitTime = 3f;
     private float m_currentWait;
+    private Vector3 spawnDir;
+    private Quaternion surfaceAlignment;
 
     void Start()
     {
         m_resourceNode = transform.GetComponentInParent<AsteroidScript>().resourceNodes;
         m_currentWait = waitTime;
+
+        spawnDir = transform.position - transform.parent.gameObject.transform.position; 
 
     }
 
@@ -25,6 +29,7 @@ public class NodeSpawner : MonoBehaviour
         else if (canSpawnResourceNode)
         {
             m_randomInt = Random.Range(0, m_resourceNode.Count);
+
             Instantiate(m_resourceNode[m_randomInt], this.transform);
             canSpawnResourceNode = false;
         }

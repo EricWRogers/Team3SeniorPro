@@ -191,7 +191,7 @@ public class PlayerMovement : MonoBehaviour
         {
             m_currentCooldown -= Time.deltaTime;
         }
-        else
+        else if(m_hook == null)
         {
             m_hookedLaunched = false;
         }

@@ -1188,6 +1188,10 @@ PrefabInstance:
       propertyPath: teatherAnchor
       value: 
       objectReference: {fileID: 1486366124}
+    - target: {fileID: 5755823019943765416, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+      propertyPath: ItemDropOffset
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7136019664139664298, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.32671332

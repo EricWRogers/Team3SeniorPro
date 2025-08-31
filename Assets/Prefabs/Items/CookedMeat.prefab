@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 46dc8874af2f76f419ae781a0348634b, type: 2}
+  isSelectedInHotbar: 0
 --- !u!136 &8061387559870823693
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -165,7 +166,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 1
+  m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

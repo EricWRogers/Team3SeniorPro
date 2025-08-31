@@ -39,7 +39,7 @@ public class GrappleHook : Bullet
             }
             
         }
-        if (Vector3.Distance(hookPos, m_playerPos.position) < 1 && (m_retract || m_isHooked))
+        if (Vector3.Distance(hookPos, m_playerPos.position) < 2 && (m_retract || m_isHooked))
         {
             m_player.GetComponent<SpringJoint>().spring = 0;
             m_isHooked = false;

@@ -109,8 +109,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 1
+  m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: -0.00000023841858, z: 0}
 --- !u!54 &2740383835666006689
@@ -169,3 +169,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 599c460ee0678c94dae5caaebe31457a, type: 2}
+  isSelectedInHotbar: 0

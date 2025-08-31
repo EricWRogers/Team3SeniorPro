@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     [Header("General Gun Settings")]
-    public Transform raycastStart;
+    private Transform raycastStart;
     public float raycastRange;
     public Transform firePoint;
 
@@ -29,6 +29,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         m_miningBeamVisual = gameObject.GetComponent<LineRenderer>();
         m_miningBeamVisual.enabled = false;
+        raycastStart = Camera.main.transform;
     }
 
     // Update is called once per frame

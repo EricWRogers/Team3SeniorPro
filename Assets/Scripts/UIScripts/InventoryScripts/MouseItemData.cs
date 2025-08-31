@@ -19,10 +19,13 @@ public class MouseItemData : MonoBehaviour
         itemSprite.color = Color.clear;
         itemSprite.preserveAspect = true;
         itemCount.text = "";
-
-        m_player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        if (m_player = null) Debug.LogWarning("Player not found");
     }
+
+    void Start()
+    {
+        m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+    }
+
     public void UpdateMouseSlot(InventorySlot _invSlot)
     {
         assignedInventorySlot.AssignItem(_invSlot);
@@ -43,6 +46,9 @@ public class MouseItemData : MonoBehaviour
 
             if (Mouse.current.leftButton.wasPressedThisFrame && !IsPointerOverUIObject())
             {
+                DropOneItemFromStack(assignedInventorySlot);
+
+                /*
                 Instantiate(assignedInventorySlot.ItemData.itemPrefab, m_player.position + m_player.forward * ItemDropOffset, quaternion.identity);
 
                 if (assignedInventorySlot.StackSize > 1)
@@ -52,6 +58,7 @@ public class MouseItemData : MonoBehaviour
                 }
                 else
                     ClearSlot();
+                */
             }
 
         }
@@ -61,17 +68,18 @@ public class MouseItemData : MonoBehaviour
     {
         if (_slotToDrop != null)
         {
+            //Transform _player = GameObject.FindWithTag("Player").GetComponent<Transform>();
             if (_slotToDrop.StackSize > 1)
             {
-                Instantiate(_slotToDrop.ItemData.itemPrefab, new Vector3(m_player.position.x, m_player.position.y - 1, m_player.position.z), Quaternion.identity);
+                Instantiate(_slotToDrop.ItemData.itemPrefab, m_player.position + m_player.forward * ItemDropOffset, quaternion.identity);
                 _slotToDrop.RemoveFromStack(1);
             }
             else
             {
-                Instantiate(_slotToDrop.ItemData.itemPrefab, new Vector3(m_player.position.x, m_player.position.y - 1, m_player.position.z), Quaternion.identity);
+                Instantiate(_slotToDrop.ItemData.itemPrefab, m_player.position + m_player.forward * ItemDropOffset, quaternion.identity);
                 ClearSlot();
             }
-            
+
         }
     }
 

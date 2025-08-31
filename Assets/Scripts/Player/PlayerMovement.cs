@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxSpeed = 10f; // maximum speed the player can reach
     public float friction = 0.05f; // how fast you slow down when not pressing keys 
     public float pitchSpeed = 50f;
+    public bool insideShip;
 
     [Header("Teather Settings")]
     private LineRenderer teatherLine;
@@ -43,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
     private float currentYaw = 0f;
 
     [Header("Grapple Hook Settings")]
-
     public Transform grappleFirePoint;
     public float hookSpeed;
     public float cooldown;
@@ -51,6 +51,10 @@ public class PlayerMovement : MonoBehaviour
     public GameObject hookPrefab;
     private GameObject m_hook;
     private bool m_hookedLaunched;
+
+    [Header("Ship vars")]
+    public Transform ship;
+
 
 
     void Start()
@@ -133,13 +137,13 @@ public class PlayerMovement : MonoBehaviour
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-            if (!usingGravBoots)
+            if (!usingGravBoots && !insideShip)
             {
                 // Normal space rotation
                 transform.Rotate(Vector3.up, mouseX, Space.Self);
                 transform.Rotate(Vector3.right, -mouseY, Space.Self);
             }
-            else
+            if(usingGravBoots && !insideShip)
             {
                 Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
                 rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
@@ -158,21 +162,23 @@ public class PlayerMovement : MonoBehaviour
                 Quaternion finalRotation = surfaceAlignedRotation * Quaternion.Euler(xRotation, 0, 0);
 
                 // Apply smooth rotation
-                transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 50f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime *10);
 
 
+            }
 
-                /*
-                //Keeps you on the ground
-                Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
-                rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
+            if (insideShip)
+            {
+                surfaceAlignedRotation = Quaternion.FromToRotation(transform.up, ship.up) * Quaternion.Euler(0, currentYaw, 0);
+                rb.AddForce(ship.up * -gravBootsForce, ForceMode.Acceleration);
 
+                currentYaw += mouseY;
+                xRotation -= mouseY;
+                xRotation = Mathf.Clamp(xRotation, -70f, 70);
+                Quaternion finalRotation = surfaceAlignedRotation * Quaternion.Euler(xRotation, 0, 0);
 
+                transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 10);
 
-                // Gravity aligned rotation
-                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, gravityDirection) * transform.rotation;
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 50f);
-                */
             }
 
         }

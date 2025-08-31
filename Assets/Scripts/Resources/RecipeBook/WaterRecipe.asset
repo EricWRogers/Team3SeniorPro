@@ -15,5 +15,4 @@ MonoBehaviour:
   outcome: {fileID: 11400000, guid: d9f9cd17bb5b98a44a014822d9484dae, type: 2}
   recipe:
   - {fileID: 11400000, guid: f563e0a6679e8da4295e0de202862d87, type: 2}
-  - {fileID: 11400000, guid: f563e0a6679e8da4295e0de202862d87, type: 2}
   amountOfOutcome: 1

@@ -1985,6 +1985,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e953954b569116e48bdcb192c7c8b516, type: 3}
+--- !u!114 &1461517136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9021059130965635821, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
+  m_PrefabInstance: {fileID: 897276212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1486366123
 GameObject:
   m_ObjectHideFlags: 0
@@ -2148,33 +2159,13 @@ PrefabInstance:
       value: WorkStation
       objectReference: {fileID: 0}
     - target: {fileID: 3038398144025959022, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-      propertyPath: isBroke
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038398144025959022, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
       propertyPath: UIController
       value: 
       objectReference: {fileID: 2053829511}
     - target: {fileID: 3038398144025959022, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-      propertyPath: workStationUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038398144025959022, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
       propertyPath: missingItemsText
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038398144025959022, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-      propertyPath: itemsNeedToRepair.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3038398144025959022, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-      propertyPath: 'itemsNeedToRepair.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 1c55be2e2231cb9429255dd9f85ef621, type: 2}
-    - target: {fileID: 3038398144025959022, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-      propertyPath: 'itemsNeedToRepair.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 1c55be2e2231cb9429255dd9f85ef621, type: 2}
+      objectReference: {fileID: 1461517136}
     - target: {fileID: 3564665704364681014, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.2972994
@@ -2215,21 +2206,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9130068700502732407, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-      propertyPath: Interacted.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9130068700502732407, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-      propertyPath: Interacted.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1759603656}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2327414622914423978, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2022457496}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
 --- !u!1001 &1681388660
 PrefabInstance:
@@ -2492,23 +2472,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a0ca8ecd09f8aa4282ea129afbcf8fe, type: 3}
---- !u!1 &2022457489 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2327414622914423978, guid: e9f3d011b4c1d6043a0598298b591f7a, type: 3}
-  m_PrefabInstance: {fileID: 1651499950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2022457496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022457489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e410db69683b362449e8e327be88f856, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2031890720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2214223939493083704, guid: a33e6eccd9ce0324e870c9d2a6b4f084, type: 3}

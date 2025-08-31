@@ -19,13 +19,13 @@ public class CraftingScript : MonoBehaviour
         {
             if (_invSlots.Count == 1)
             {
-                if (m_itemCounter < 0)
+                if (_invSlots[0].StackSize > _itemAmounts[_invSlots[0].ItemData])
                 {
-                    int itemsLeftInStack = Mathf.Abs(m_itemCounter);
+                    int itemsLeftInStack = _invSlots[0].StackSize - _itemAmounts[_invSlots[0].ItemData];
                     _invSlots[0].UpdateInventorySlot(_invSlots[0].ItemData, itemsLeftInStack);
                     PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
                 }
-                else if (m_itemCounter == 0)
+                else if (_invSlots[0].StackSize == _itemAmounts[_invSlots[0].ItemData])
                 {
                     _invSlots[0].ClearSlot();
                     PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();

@@ -42,9 +42,28 @@ public class InventorySystem
 
         if (HasFreeSlot(out InventorySlot freeSlot))//check for free slot in inventory
         {
-            freeSlot.UpdateInventorySlot(_itemToAdd, _amountToAdd);
-            OnInventorySlotChanged?.Invoke(freeSlot);
-            return true;
+            if (_itemToAdd.maxStack < _amountToAdd)
+            {
+                int amountOfFullStacks = _amountToAdd / _itemToAdd.maxStack;
+                int itemsLeftToAdd = _amountToAdd - (_itemToAdd.maxStack * amountOfFullStacks);
+                for (int i = 0; i < amountOfFullStacks; i++)
+                {
+                    if (HasFreeSlot(out InventorySlot freeSlot1))
+                    {
+                        freeSlot1.UpdateInventorySlot(_itemToAdd, _itemToAdd.maxStack);
+                        OnInventorySlotChanged?.Invoke(freeSlot1);
+                    }
+                    
+                }
+                AddToInventory(_itemToAdd, itemsLeftToAdd);
+            }
+            else
+            {
+                freeSlot.UpdateInventorySlot(_itemToAdd, _amountToAdd);
+                OnInventorySlotChanged?.Invoke(freeSlot);
+                return true;
+            }
+            
         }
 
         return false;

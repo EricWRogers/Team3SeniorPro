@@ -9,6 +9,11 @@ public class TextFade : MonoBehaviour
     private float m_fullTime;
     private float m_currentWait;
 
+    void Awake()
+    {
+        text = gameObject.GetComponent<TextMeshProUGUI>();
+    }
+
     void Update()
     {
         Fade();

@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class PlayerInteract : MonoBehaviour
     public PlayerInventoryHolder inventoryHolder;
     private PlayerMovement playerMovement;
     public HotBarDisplay hotBarDisplay;
+    public TextMeshProUGUI interactText;
     void Start()
     {
         gameObject.TryGetComponent<PlayerMovement>(out playerMovement);
@@ -35,9 +37,11 @@ public class PlayerInteract : MonoBehaviour
 
         if (Physics.Raycast(new Ray(startPos.position, startPos.forward), out RaycastHit hit, 2f))
         {
+
             if (hit.collider.CompareTag("Interactable"))
             {
                 lookingAtInteractable = true;
+                interactText.color = Color.white;
             }
             else
             {
@@ -47,6 +51,7 @@ public class PlayerInteract : MonoBehaviour
             if (hit.collider.CompareTag("Item"))
             {
                 lookingAtItem = true;
+                interactText.color = Color.white;
             }
             else
             {
@@ -57,6 +62,7 @@ public class PlayerInteract : MonoBehaviour
         {
             lookingAtInteractable = false;
             lookingAtItem = false;
+            interactText.color = Color.clear;
         }
 
         if (lookingAtItem && Input.GetKeyDown(KeyCode.E))

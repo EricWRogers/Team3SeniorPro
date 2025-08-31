@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8037844623483997179}
   - component: {fileID: 9130068700502732407}
   - component: {fileID: 3038398144025959022}
+  - component: {fileID: 7845500936405609419}
   m_Layer: 0
   m_Name: WorkStation
   m_TagString: Interactable
@@ -137,18 +138,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
-        m_MethodName: ChangeCursor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   CloseInteraction:
     m_PersistentCalls:
       m_Calls: []
@@ -164,4 +153,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9f712ded29b2a409e0b46328b2cdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  workStationUI: {fileID: 0}
+  UIController: {fileID: 0}
+  isBroke: 1
+  itemsNeedToRepair:
+  - {fileID: 11400000, guid: 1c55be2e2231cb9429255dd9f85ef621, type: 2}
+  - {fileID: 11400000, guid: 1c55be2e2231cb9429255dd9f85ef621, type: 2}
+  missingItemsText: {fileID: 0}
+--- !u!114 &7845500936405609419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327414622914423978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e410db69683b362449e8e327be88f856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

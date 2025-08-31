@@ -19,13 +19,13 @@ public class RepairScript : MonoBehaviour
         {
             if (_invSlots.Count == 1)
             {
-                if (m_itemCounter < 0)
+                if (_invSlots[0].StackSize > _itemAmounts[_invSlots[0].ItemData])
                 {
-                    int itemsLeftInStack = Mathf.Abs(m_itemCounter);
+                    int itemsLeftInStack = _invSlots[0].StackSize - _itemAmounts[_invSlots[0].ItemData];
                     _invSlots[0].UpdateInventorySlot(_invSlots[0].ItemData, itemsLeftInStack);
                     PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
                 }
-                else if (m_itemCounter == 0)
+                else if (_invSlots[0].StackSize == _itemAmounts[_invSlots[0].ItemData])
                 {
                     _invSlots[0].ClearSlot();
                     PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
@@ -40,9 +40,11 @@ public class RepairScript : MonoBehaviour
                         int itemsLeftInStack = _invSlots[i].StackSize - _itemAmounts[_invSlots[i].ItemData];
                         _invSlots[i].UpdateInventorySlot(_invSlots[i].ItemData, itemsLeftInStack);
                         PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
+                        return true;
                     }
                     else if (_invSlots[i].StackSize <= _itemAmounts[_invSlots[i].ItemData])
                     {
+                        Debug.Log("clear slot");
                         _itemAmounts[_invSlots[i].ItemData] = _itemAmounts[_invSlots[i].ItemData] - _invSlots[i].StackSize;
                         _invSlots[i].ClearSlot();
                         PlayerInventoryHolder.OnPlayerInventoryChanged.Invoke();
@@ -80,7 +82,6 @@ public class RepairScript : MonoBehaviour
                     //Debug.Log($"checker has {checker[item]} {item} and itemAmounts has {_itemAmounts[item]} {item} {m_playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData.id} {item.id}");
                     if (m_playerInventory.PrimaryInventorySystem.InventorySlots[x].ItemData == item)
                     {
-                        Debug.Log("1");
                         _invSlot.Add(m_playerInventory.PrimaryInventorySystem.InventorySlots[x]);
                         checker[item] += m_playerInventory.PrimaryInventorySystem.InventorySlots[x].StackSize;
                         //Debug.Log($"the checker has {checker[item]} {item} and you need {_itemAmounts[item]} {item}");

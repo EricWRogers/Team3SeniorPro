@@ -169,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (insideShip)
             {
-                surfaceAlignedRotation = Quaternion.FromToRotation(transform.up, ship.up) * Quaternion.Euler(0, currentYaw, 0);
+                surfaceAlignedRotation = Quaternion.FromToRotation(Vector3.up, ship.up) * Quaternion.Euler(0, currentYaw, 0);
                 rb.AddForce(ship.up * -gravBootsForce, ForceMode.Acceleration);
 
                 currentYaw += mouseY;

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4064238902127746128}
   - component: {fileID: 2917691926540542641}
   - component: {fileID: 7310482029773764519}
-  m_Layer: 0
+  - component: {fileID: 3985495797313988557}
+  m_Layer: 8
   m_Name: Agressive Mob
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -143,3 +144,24 @@ MonoBehaviour:
   itemsToDrop:
   - {fileID: 7663720535236508791, guid: f94749c39d68dda479cba16d76551a6e, type: 3}
   - {fileID: 9185507809204333315, guid: aab8ed850dd18da41acf872634c1d844, type: 3}
+--- !u!65 &3985495797313988557
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9186637621029352937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

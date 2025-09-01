@@ -1701,6 +1701,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5792601776790878766, guid: e953954b569116e48bdcb192c7c8b516, type: 3}
   m_PrefabInstance: {fileID: 379137807960887493}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7053638650745861038
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.0132282
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214114644071059240, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186637621029352937, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
+      propertyPath: m_Name
+      value: Agressive Mob (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 712847a5c9b289986a448a24d2cd0eda, type: 3}
 --- !u!1001 &7134447144397269583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1915,3 +1972,4 @@ SceneRoots:
   - {fileID: 1486366124}
   - {fileID: 8898270453037171093}
   - {fileID: 1443603755}
+  - {fileID: 7053638650745861038}

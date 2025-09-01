@@ -21,7 +21,7 @@ public class AsteroidScript : MonoBehaviour
         spinSpeed = Random.Range(minSpinSpeed, maxSpinSpeed);
         float thrust = Random.Range(minThrust, maxThrust);
 
-         rb.AddForce(Vector3.left * thrust , ForceMode.Impulse);
+         rb.AddForce(Vector3.left * thrust * rb.mass/2 , ForceMode.Impulse);
     }
 
 

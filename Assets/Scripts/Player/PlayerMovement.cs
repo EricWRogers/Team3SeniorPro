@@ -127,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (usingGravBoots && !insideShip)
         {
+            currentYaw += mouseX;
+            
             Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
             rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
             surfaceAlignedRotation = Quaternion.FromToRotation(Vector3.up, gravityDirection) * Quaternion.Euler(0, currentYaw, 0);

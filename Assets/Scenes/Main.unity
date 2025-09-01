@@ -368,45 +368,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2673573039827646542, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
-      propertyPath: m_text
-      value: '(General Controls)
-
-        WSAD- to move
-
-        I - inventory
-
-        Rigth
-        click - use held item
-
-        left click - fire gun when held
-
-        Alt
-        click - items in invenory split stack
-
-        R - switches gun mode
-
-
-        (Space
-        Movemnt)
-
-        Q - grapple
-
-        C - grav boots
-
-        Space - up
-        crtl down
-
-        V,B - rotate'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2673573039827646542, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
-      propertyPath: m_fontSize
-      value: 19.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2673573039827646542, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3104092430055075084, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -439,26 +400,6 @@ PrefabInstance:
       propertyPath: teatherAnchor
       value: 
       objectReference: {fileID: 1062251730}
-    - target: {fileID: 5537062579084283251, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
-      propertyPath: mouseSensitivity
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548513254680840342, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 421.4641
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548513254680840342, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 295.9782
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548513254680840342, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -17.130371
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548513254680840342, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 29.366089
-      objectReference: {fileID: 0}
     - target: {fileID: 7136019664139664298, guid: a66cd31dde40f1e4dab0344de51b8b68, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9

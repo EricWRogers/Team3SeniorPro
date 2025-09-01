@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject hookPrefab;
     private GameObject m_hook;
     private bool m_hookedLaunched;
+    public LineRenderer grappleLineRender;
 
     [Header("Ship vars")]
     public Transform ship;
@@ -108,6 +109,16 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
+        }
+        if (m_hook != null)
+        {
+            grappleLineRender.enabled = true;
+            grappleLineRender.SetPosition(0, grappleFirePoint.transform.position);
+            grappleLineRender.SetPosition(1, m_hook.transform.position);
+        }
+        else
+        {
+            grappleLineRender.enabled = false;
         }
     }
     void HandleRotation()

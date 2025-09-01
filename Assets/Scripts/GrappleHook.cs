@@ -34,7 +34,7 @@ public class GrappleHook : Bullet
             if (m_isHooked)
             {
                 speed = rectractSpeed;
-                GetComponent<Rigidbody>().isKinematic = false;
+                //GetComponent<Rigidbody>().isKinematic = false;
                 m_player.GetComponent<SpringJoint>().spring = 0;
             }
             
@@ -63,6 +63,7 @@ public class GrappleHook : Bullet
             Debug.Log("Hooked");
             m_isHooked = true;
             speed = 0;
+            transform.SetParent(hitInfo.transform);
             GetComponent<Rigidbody>().isKinematic = true;
         }
         
@@ -70,6 +71,7 @@ public class GrappleHook : Bullet
     public void Retract()
     {
         m_retract = true;
+        speed = rectractSpeed;
         transform.LookAt(m_playerPos);
     }
 }

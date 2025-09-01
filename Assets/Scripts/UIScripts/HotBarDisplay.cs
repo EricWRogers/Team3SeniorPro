@@ -149,6 +149,7 @@ public class HotBarDisplay : StaticInventoryDisplay
 
     private void HoldItem()
     {
+        EmptyHand();
         GameObject item = Instantiate(m_slots[m_currentIndex].AssignedInvSlot.ItemData.itemPrefab, hand.transform.position, hand.transform.rotation, hand.transform);
         item.GetComponent<Collider>().enabled = false;
         item.GetComponent<Rigidbody>().isKinematic = true;

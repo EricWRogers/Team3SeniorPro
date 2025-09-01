@@ -1,11 +1,12 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class BasicMeleeAi : MonoBehaviour
 {
 
     public float speed = 5;
     public List<GameObject> itemsToDrop;
+    public List<string> tags;
 
     void Start()
     {
@@ -19,7 +20,7 @@ public class BasicMeleeAi : MonoBehaviour
         transform.LookAt(PlayerManager.instance.transform);
         Vector3 dir = PlayerManager.instance.transform.position - transform.position; // not actually direction, but whatever
         Physics.Raycast(transform.position, dir, out RaycastHit hit, dir.magnitude);
-        if (hit.collider.gameObject != PlayerManager.instance.gameObject)
+        if (!tags.Contains(hit.transform.tag))
         {
             transform.position += transform.right * speed * Time.deltaTime;
         }

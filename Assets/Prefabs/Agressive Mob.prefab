@@ -343,7 +343,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  maxHealth: 30
+  maxHealth: 20
   currentHealth: 0
   defaultToMaxHealth: 1
 --- !u!114 &7310482029773764519
@@ -361,6 +361,8 @@ MonoBehaviour:
   speed: 5
   itemsToDrop:
   - {fileID: 7663720535236508791, guid: f94749c39d68dda479cba16d76551a6e, type: 3}
+  tags:
+  - Player
 --- !u!65 &3985495797313988557
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -380,5 +382,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}

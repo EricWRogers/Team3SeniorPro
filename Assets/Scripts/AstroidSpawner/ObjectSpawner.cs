@@ -62,7 +62,7 @@ public class ObjectSpawner : MonoBehaviour
         GameObject temp = Instantiate(objectToSpawn[randIndex], spawnPosition, Random.rotation);
         temp.transform.parent = transform;
 
-        temp.transform.localScale = Vector3.one * Random.Range(6f, 20f);
+        temp.transform.localScale = Vector3.one * Random.Range(.5f, 2f);
     }
 
     public void DestoryedAstroid()

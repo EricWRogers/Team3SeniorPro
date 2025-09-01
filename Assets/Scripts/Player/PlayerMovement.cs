@@ -147,14 +147,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
                 rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
-
-                // Calculate base rotation aligned with surface
+              
                 surfaceAlignedRotation = Quaternion.FromToRotation(Vector3.up, gravityDirection) * Quaternion.Euler(0, currentYaw, 0);
 
-                // Update yaw based on mouse input
                 currentYaw += mouseX;
-
-                // Calculate pitch rotation
+          
                 xRotation -= mouseY;
                 xRotation = Mathf.Clamp(xRotation, -70f, 70f);
 
@@ -169,16 +166,21 @@ public class PlayerMovement : MonoBehaviour
 
             if (insideShip)
             {
-                surfaceAlignedRotation = Quaternion.FromToRotation(Vector3.up, ship.up) * Quaternion.Euler(0, currentYaw, 0);
-                rb.AddForce(ship.up * -gravBootsForce, ForceMode.Acceleration);
+                rb.AddForce(-Vector3.up* gravBootsForce);
 
-                currentYaw += mouseY;
+                Vector3 currentEuler = transform.rotation.eulerAngles;
+                
+             
                 xRotation -= mouseY;
-                xRotation = Mathf.Clamp(xRotation, -70f, 70);
-                Quaternion finalRotation = surfaceAlignedRotation * Quaternion.Euler(xRotation, 0, 0);
+                xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 10);
+                yRotation += mouseX;
+   
 
+                transform.rotation = ship.rotation;
+
+                transform.rotation *= Quaternion.Euler(xRotation, yRotation, 0);
+                
             }
 
         }

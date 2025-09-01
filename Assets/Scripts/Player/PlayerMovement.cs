@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Mouse Settings")]
-    public float mouseSensitivity = 1f;
+    public float mouseSensitivity = 100f;
     private float xRotation = 0f;
     private float yRotation = 0f;
     private float zRotation = 0f;
@@ -57,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
     public Transform ship;
 
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -67,127 +66,18 @@ public class PlayerMovement : MonoBehaviour
         teatherLine = gameObject.GetComponent<LineRenderer>() == null ? gameObject.AddComponent<LineRenderer>() : gameObject.GetComponent<LineRenderer>();
         teatherLine.positionCount = 2;
         teatherLine.material = teatherMaterial;
-        // Update is called once per frame
 
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            usingTeather = !usingTeather;
-            canMove = !canMove;
-        }
+
         if (canMove)
         {
             rb.isKinematic = false;
-            if (Input.GetKey(KeyCode.W)) rb.AddForce(transform.forward * speed);
-            if (Input.GetKey(KeyCode.S)) rb.AddForce(-transform.forward * speed);
-            if (Input.GetKey(KeyCode.A)) rb.AddForce(-transform.right * speed);
-            if (Input.GetKey(KeyCode.D)) rb.AddForce(transform.right * speed);
-            if (Input.GetKey(KeyCode.Space) && !insideShip) rb.AddForce(transform.up * speed);
-            if (Input.GetKey(KeyCode.LeftControl)) rb.AddForce(-transform.up * speed);
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                usingGravBoots = !usingGravBoots;
-                if (usingGravBoots) CheckGravBoots();
 
-            }
-            if (Input.GetKey(KeyCode.V))
-            {
-                //zRotation += pitchSpeed * Time.deltaTime;
-                transform.Rotate(Vector3.forward * pitchSpeed * Time.deltaTime, Space.Self);
-            }
-            if (Input.GetKey(KeyCode.B))
-            {
-                transform.Rotate(-Vector3.forward * pitchSpeed * Time.deltaTime, Space.Self);
-                //zRotation -= pitchSpeed * Time.deltaTime;
-            }
-            if (usingTeather)
-            {
-                Vector3 directionToAnchor = teatherAnchor.position - transform.position;
-                float distanceToAnchor = directionToAnchor.magnitude;
-
-                //Teather line rednering
-                teatherLine.enabled = true;
-                teatherLine.startWidth = teatherWidth;
-                teatherLine.endWidth = teatherWidth;
-                teatherLine.SetPosition(0, transform.position);
-                teatherLine.SetPosition(1, teatherAnchor.position);
-
-                // Check if we're beyond the minimum distance
-                if (distanceToAnchor > teatherMinDistance)
-                {
-                    float dampingFactor = Mathf.Clamp01((distanceToAnchor - teatherMinDistance) / (teatherMaxDistance - teatherMinDistance));
-                    dampingFactor = 1f - Mathf.Pow(1f - dampingFactor, teatherDampening); // Apply exponential damping
-                    // Apply force toward the tether anchor
-                    Vector3 tetherForce = directionToAnchor.normalized * speed * dampingFactor;
-                    rb.AddForce(tetherForce);
-                    // Clamp position to max tether distance
-                    if (distanceToAnchor > teatherMaxDistance)
-                    {
-                        Vector3 clampedPosition = teatherAnchor.position - directionToAnchor.normalized * teatherMaxDistance;
-                        transform.position = clampedPosition;
-                    }
-                }
-            }
-            if (rb.linearVelocity.magnitude > 0.001f)
-            {
-                rb.linearVelocity -= rb.linearVelocity * friction; // Apply Friction
-                rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed); // Limit speed
-            }
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-
-            if (!usingGravBoots && !insideShip)
-            {
-                // Normal space rotation
-                transform.Rotate(Vector3.up, mouseX, Space.Self);
-                transform.Rotate(Vector3.right, -mouseY, Space.Self);
-
-                xRotation -= mouseY;
-                xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-
-                yRotation += mouseX;
-            }
-            if(usingGravBoots && !insideShip)
-            {
-                Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
-                rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
-              
-                surfaceAlignedRotation = Quaternion.FromToRotation(Vector3.up, gravityDirection) * Quaternion.Euler(0, currentYaw, 0);
-
-                currentYaw += mouseX;
-          
-                xRotation -= mouseY;
-                xRotation = Mathf.Clamp(xRotation, -70f, 70f);
-
-                // Combine surface alignment with pitch and yaw
-                Quaternion finalRotation = surfaceAlignedRotation * Quaternion.Euler(xRotation, 0, 0);
-
-                // Apply smooth rotation
-                transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime *10);
-
-
-            }
-
-            if (insideShip)
-            {
-                rb.AddForce(-Vector3.up* gravBootsForce);
-
-                Vector3 currentEuler = transform.rotation.eulerAngles;
-                
-             
-                xRotation -= mouseY;
-                xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-
-                yRotation += mouseX;
-   
-
-                
-
-                transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-                
-            }
+            HandleInput();
+            Teather();
+            HandleRotation();
 
         }
         else
@@ -199,14 +89,14 @@ public class PlayerMovement : MonoBehaviour
         {
             m_currentCooldown -= Time.deltaTime;
         }
-        else if(m_hook == null)
+        else if (m_hook == null)
         {
             m_hookedLaunched = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if(m_hookedLaunched && m_hook != null) CancelGrapple();
+            if (m_hookedLaunched && m_hook != null) CancelGrapple();
 
             if (m_currentCooldown <= 0)
             {
@@ -217,10 +107,74 @@ public class PlayerMovement : MonoBehaviour
                     m_hookedLaunched = true;
                 }
             }
-            
+
+        }
+    }
+    void HandleRotation()
+    {
+
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+        yRotation += mouseX;
+
+        if (!usingGravBoots && !insideShip)
+        {
+            // Normal space rotation
+            transform.Rotate(Vector3.up, mouseX, Space.Self);
+            transform.Rotate(Vector3.right, -mouseY, Space.Self);
+        }
+        if (usingGravBoots && !insideShip)
+        {
+            Vector3 gravityDirection = (transform.position - gravityObject.position).normalized;
+            rb.AddForce(gravityDirection * -gravBootsForce, ForceMode.Acceleration);
+            surfaceAlignedRotation = Quaternion.FromToRotation(Vector3.up, gravityDirection) * Quaternion.Euler(0, currentYaw, 0);
+
+            // Combine surface alignment with pitch and yaw
+            Quaternion finalRotation = surfaceAlignedRotation * Quaternion.Euler(xRotation, 0, 0);
+
+            // Apply smooth rotation
+            transform.rotation = Quaternion.Slerp(transform.rotation, finalRotation, Time.deltaTime * 10);
+        }
+        if (insideShip)
+        {
+            rb.AddForce(-Vector3.up * gravBootsForce);
+            Vector3 currentEuler = transform.rotation.eulerAngles;
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         }
     }
 
+    void Teather()
+    {
+        if (usingTeather)
+        {
+            Vector3 directionToAnchor = teatherAnchor.position - transform.position;
+            float distanceToAnchor = directionToAnchor.magnitude;
+            //Teather line rednering
+            teatherLine.enabled = true;
+            teatherLine.startWidth = teatherWidth;
+            teatherLine.endWidth = teatherWidth;
+            teatherLine.SetPosition(0, transform.position);
+            teatherLine.SetPosition(1, teatherAnchor.position);
+            // Check if we're beyond the minimum distance
+            if (distanceToAnchor > teatherMinDistance)
+            {
+                float dampingFactor = Mathf.Clamp01((distanceToAnchor - teatherMinDistance) / (teatherMaxDistance - teatherMinDistance));
+                dampingFactor = 1f - Mathf.Pow(1f - dampingFactor, teatherDampening); // Apply exponential damping
+                // Apply force toward the tether anchor
+                Vector3 tetherForce = directionToAnchor.normalized * speed * dampingFactor;
+                rb.AddForce(tetherForce);
+                // Clamp position to max tether distance
+                if (distanceToAnchor > teatherMaxDistance)
+                {
+                    Vector3 clampedPosition = teatherAnchor.position - directionToAnchor.normalized * teatherMaxDistance;
+                    transform.position = clampedPosition;
+                }
+            }
+        }
+
+    }
 
     void CheckGravBoots()
     {
@@ -255,6 +209,42 @@ public class PlayerMovement : MonoBehaviour
     {
         m_currentCooldown = 0;
         m_hook.GetComponent<GrappleHook>().Retract();
+    }
+
+    private void HandleInput()
+    {
+
+        
+        if (Input.GetKey(KeyCode.W))    rb.AddForce(transform.forward * speed);
+        if (Input.GetKey(KeyCode.S))    rb.AddForce(-transform.forward * speed);
+        if (Input.GetKey(KeyCode.A))    rb.AddForce(-transform.right * speed);
+        if (Input.GetKey(KeyCode.D))    rb.AddForce(transform.right * speed);
+        if (Input.GetKey(KeyCode.Space) && !insideShip)         rb.AddForce(transform.up * speed);
+        if (Input.GetKey(KeyCode.LeftControl) && !insideShip)   rb.AddForce(-transform.up * speed);
+            
+        if (Input.GetKeyDown(KeyCode.C) && !insideShip)
+        {
+            usingGravBoots = !usingGravBoots;
+            if (usingGravBoots) CheckGravBoots();
+
+        }
+            
+            //Rolling
+        if (Input.GetKey(KeyCode.V))
+        {
+            transform.Rotate(Vector3.forward * pitchSpeed * Time.deltaTime, Space.Self);
+        }
+
+        if (Input.GetKey(KeyCode.B))
+        {
+            transform.Rotate(-Vector3.forward * pitchSpeed * Time.deltaTime, Space.Self);
+        }
+
+        if (rb.linearVelocity.magnitude > 0.001f)
+        {
+            rb.linearVelocity -= rb.linearVelocity * friction; // Apply Friction
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed); // Limit speed
+        }
     }
 }
     

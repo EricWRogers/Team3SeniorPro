@@ -125,7 +125,6 @@ MonoBehaviour:
   rommingArea: {x: 30, y: 10, z: 30}
   itemsToDrop:
   - {fileID: 7663720535236508791, guid: f94749c39d68dda479cba16d76551a6e, type: 3}
-  - {fileID: 9185507809204333315, guid: aab8ed850dd18da41acf872634c1d844, type: 3}
   speed: 2
 --- !u!114 &4629304327777454649
 MonoBehaviour:

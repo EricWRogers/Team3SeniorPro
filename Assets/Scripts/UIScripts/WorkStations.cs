@@ -8,12 +8,24 @@ public class WorkStations : MonoBehaviour
     private RepairScript m_repairScript;
     private PlayerInteract m_playerInteract;
     public bool isBroke = false;
+    public GameObject BrokenDisplay;
     public List<ItemData> itemsNeedToRepair = new();
     public TextMeshProUGUI missingItemsText;
     void Awake()
     {
         m_playerInteract = GameObject.FindWithTag("Player").GetComponent<PlayerInteract>();
         m_repairScript = gameObject.GetComponent<RepairScript>();
+    }
+    void Update()
+    {
+        if (isBroke)
+        {
+            BrokenDisplay.SetActive(true);
+        }
+        else
+        {
+            BrokenDisplay.SetActive(false);
+        }
     }
 
     public void InteractWithWorkStation()
@@ -30,7 +42,7 @@ public class WorkStations : MonoBehaviour
             }
             m_playerInteract.ChangeCursor();
         }
-        else if(isBroke)
+        else if (isBroke)
         {
             Debug.Log("is broke");
             if (m_repairScript.TryRepair(itemsNeedToRepair, out List<ItemData> distinctItemList))

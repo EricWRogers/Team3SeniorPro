@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSpawnResourceNode: 1
-  waitTime: 3
+  waitTime: 120
 --- !u!1 &909775740735997026
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSpawnResourceNode: 1
-  waitTime: 3
+  waitTime: 120
 --- !u!1 &949324709896749691
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSpawnResourceNode: 1
-  waitTime: 3
+  waitTime: 120
 --- !u!1 &1772253293332027144
 GameObject:
   m_ObjectHideFlags: 0

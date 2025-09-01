@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class CraftingScript : MonoBehaviour
 {
-    public Recipes recipes;
     private PlayerInventoryHolder m_playerInventory;
-    private int m_itemCounter;
 
     void Awake()
     {
-        m_playerInventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventoryHolder>();
+        m_playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryHolder>();
     }
     public void Craft(Recipes _recipe)
     {

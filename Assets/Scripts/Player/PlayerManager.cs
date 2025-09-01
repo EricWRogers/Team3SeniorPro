@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        
+
         if (hand.transform.childCount > 0)
             heldItem = hand.transform.GetChild(0).GetComponent<ItemScript>().itemData;
         if (usingOxygen)
@@ -64,7 +64,7 @@ public class PlayerManager : MonoBehaviour
             currentOxygen -= oxygenDecayRate * Time.deltaTime;
             if (currentOxygen <= 0)
             {
-                TakeDamage(1f);
+                TakeDamage(1f * Time.deltaTime);
                 currentOxygen = 0;
             }
         }
@@ -72,10 +72,16 @@ public class PlayerManager : MonoBehaviour
         m_currentHunger -= m_hungerDecayRate * Time.deltaTime;
         m_currentThirst -= m_thristDecayRate * Time.deltaTime;
 
-        if (m_currentHunger <= 0 || m_currentThirst <= 0)
+        if (m_currentHunger <= 0)
         {
-            TakeDamage(1f);
+            TakeDamage(1f * Time.deltaTime);
             m_currentHunger = 0;
+            m_currentThirst = 0;
+        }
+
+        if (m_currentThirst <= 0)
+        {
+            TakeDamage(1f * Time.deltaTime);
             m_currentThirst = 0;
         }
         
@@ -85,7 +91,7 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        m_currentHealth -= (int)damage;
+        m_currentHealth -= damage;
         if (m_currentHealth <= 0)
         {
             Death();

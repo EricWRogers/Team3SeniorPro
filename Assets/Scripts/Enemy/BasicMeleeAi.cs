@@ -18,15 +18,27 @@ public class BasicMeleeAi : MonoBehaviour
 
         transform.LookAt(PlayerManager.instance.transform);
         Vector3 dir = PlayerManager.instance.transform.position - transform.position; // not actually direction, but whatever
-
-        if (Physics.Raycast(transform.position, dir, out RaycastHit hit, dir.magnitude))
+        Physics.Raycast(transform.position, dir, out RaycastHit hit, dir.magnitude);
+        if (hit.collider.gameObject != PlayerManager.instance.gameObject)
         {
-            if (hit.collider.gameObject != PlayerManager.instance.gameObject)
+            transform.position += transform.right * speed * Time.deltaTime;
+        }
+        else
+        {
+            if (dir.magnitude > 2f)
             {
-                transform.position += transform.right * speed * Time.deltaTime;
+                transform.position += dir.normalized * speed * Time.deltaTime;
+            }
+            else
+            {
+                PlayerManager.instance.TakeDamage(2f * Time.deltaTime);
+
             }
         }
-        transform.position += dir.normalized * speed * Time.deltaTime;
+        
+
+        
+
 
 
     }

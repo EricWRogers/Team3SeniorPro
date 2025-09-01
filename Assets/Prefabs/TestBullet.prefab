@@ -96,7 +96,7 @@ MonoBehaviour:
       m_Calls: []
   mask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 456
   tags:
   - Enemy
 --- !u!1001 &8052444772384407114

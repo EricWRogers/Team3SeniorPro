@@ -24,8 +24,9 @@ public class PlayerMovement : MonoBehaviour
     public float pitchSpeed = 50f;
     public bool insideShip;
 
-    [Header("Teather Settings")]
-    private LineRenderer teatherLine;
+    [Header("Tether Settings")]
+
+    [SerializeField] private LineRenderer teatherLine;
     [SerializeField] private Material teatherMaterial;
     [SerializeField] private float teatherWidth = 0.2f;
     [SerializeField] private Transform teatherAnchor;
@@ -83,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.S)) rb.AddForce(-transform.forward * speed);
             if (Input.GetKey(KeyCode.A)) rb.AddForce(-transform.right * speed);
             if (Input.GetKey(KeyCode.D)) rb.AddForce(transform.right * speed);
-            if (Input.GetKey(KeyCode.Space)) rb.AddForce(transform.up * speed);
+            if (Input.GetKey(KeyCode.Space) && !insideShip) rb.AddForce(transform.up * speed);
             if (Input.GetKey(KeyCode.LeftControl)) rb.AddForce(-transform.up * speed);
             if (Input.GetKeyDown(KeyCode.C))
             {
@@ -142,6 +143,11 @@ public class PlayerMovement : MonoBehaviour
                 // Normal space rotation
                 transform.Rotate(Vector3.up, mouseX, Space.Self);
                 transform.Rotate(Vector3.right, -mouseY, Space.Self);
+
+                xRotation -= mouseY;
+                xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
+                yRotation += mouseX;
             }
             if(usingGravBoots && !insideShip)
             {
@@ -177,9 +183,9 @@ public class PlayerMovement : MonoBehaviour
                 yRotation += mouseX;
    
 
-                transform.rotation = ship.rotation;
+                
 
-                transform.rotation *= Quaternion.Euler(xRotation, yRotation, 0);
+                transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
                 
             }
 

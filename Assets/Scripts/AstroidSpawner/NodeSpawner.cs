@@ -16,7 +16,8 @@ public class NodeSpawner : MonoBehaviour
         m_resourceNode = transform.GetComponentInParent<AsteroidScript>().resourceNodes;
         m_currentWait = waitTime;
 
-        spawnDir = transform.position - transform.parent.gameObject.transform.position; 
+        spawnDir = transform.position - transform.parent.gameObject.transform.position;
+        SpawnResource();
 
     }
 
@@ -28,15 +29,18 @@ public class NodeSpawner : MonoBehaviour
         }
         else if (canSpawnResourceNode)
         {
-            m_randomInt = Random.Range(0, m_resourceNode.Count);
-
-            Instantiate(m_resourceNode[m_randomInt], this.transform);
-            canSpawnResourceNode = false;
+            SpawnResource();
         }
     }
     public void ResetTimer()
     {
         m_currentWait = waitTime;
         canSpawnResourceNode = true;
+    }
+    public void SpawnResource()
+    {
+        m_randomInt = Random.Range(0, m_resourceNode.Count);
+        Instantiate(m_resourceNode[m_randomInt], this.transform);
+        canSpawnResourceNode = false;
     }
 }

@@ -38,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     [Header("General")]
     public GameObject hand;
     public ItemData heldItem;
+    public GameObject DeadUI;
 
     void Awake()
     {
@@ -51,6 +52,7 @@ public class PlayerManager : MonoBehaviour
         m_currentHunger = m_maxHunger;
         m_currentThirst = m_maxThirst;
         currentOxygen = maxOxygen;
+        DeadUI.SetActive(false);
 
     }
 
@@ -137,6 +139,11 @@ public class PlayerManager : MonoBehaviour
     public void Death()
     {
         Debug.Log("Player has died.");
+        DeadUI.SetActive(true);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().canMove = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
     }
 
 }

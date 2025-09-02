@@ -26,7 +26,7 @@ public class BasicMeleeAi : MonoBehaviour
         }
         else
         {
-            if (dir.magnitude > 2f)
+            if (dir.magnitude > 3f)
             {
                 transform.position += dir.normalized * speed * Time.deltaTime;
             }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PauseGame : MonoBehaviour
@@ -28,6 +29,7 @@ public class PauseGame : MonoBehaviour
         if (!gamePause)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().canMove = false;
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             gamePause = true;
             PauseHUD.SetActive(true);
@@ -36,6 +38,7 @@ public class PauseGame : MonoBehaviour
         else
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().canMove = true;
+            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             gamePause = false;
             Time.timeScale = 1;
@@ -46,5 +49,10 @@ public class PauseGame : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

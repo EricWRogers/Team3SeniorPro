@@ -14,11 +14,13 @@ public class PlayerWeapon : MonoBehaviour
     public float miningDamage = 1f;
     public bool miningGunActive = true;
     private LineRenderer m_miningBeamVisual;
+    public GameObject miningIndicator;
 
     [Header("Shooting Gun Settings")]
     public float fireRateShooting = 1f;
     public GameObject bulletPrefab;
     public float bulletSpeed = 20f;
+    public GameObject gunIndicator;
 
 
 
@@ -86,7 +88,16 @@ public class PlayerWeapon : MonoBehaviour
                 time = 0f;
             }
         }
-        
+        if (miningGunActive)
+        {
+            miningIndicator.SetActive(true);
+            gunIndicator.SetActive(false);
+        }
+        else
+        {
+            miningIndicator.SetActive(false);
+            gunIndicator.SetActive(true);
+        }
         
     }
 

@@ -9,6 +9,7 @@ TagManager:
   - Mineable
   - Enemy
   - Asteroid
+  - Bullet
   layers:
   - Default
   - TransparentFX

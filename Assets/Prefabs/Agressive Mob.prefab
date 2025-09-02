@@ -417,6 +417,7 @@ MonoBehaviour:
   itemsToDrop:
   - {fileID: 7663720535236508791, guid: f94749c39d68dda479cba16d76551a6e, type: 3}
   tags:
+  - Bullet
   - Player
 --- !u!136 &8305502391322563146
 CapsuleCollider:

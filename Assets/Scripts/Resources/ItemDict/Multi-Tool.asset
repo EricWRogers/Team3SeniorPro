@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 0
   displayName: Multi-Tool
   description: Trust tool for mining and self defense.
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 6d9983624f4cd394ba43f2e218084466, type: 3}
   maxStack: 1
   itemPrefab: {fileID: 6447181087649908837, guid: 59c2861727c9316e6956b99cd9ecefac, type: 3}
-  itemTypes: 0
+  itemUseType: 0

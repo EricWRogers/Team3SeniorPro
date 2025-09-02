@@ -209,6 +209,7 @@ MonoBehaviour:
   m_assignedInvSlot:
     m_itemID: -1
     m_stackSize: -1
+  displayText: {fileID: 0}
 --- !u!222 &8940241435257694796
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -229,7 +230,7 @@ GameObject:
   - component: {fileID: 725112175889527377}
   - component: {fileID: 6955276175497823991}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AmountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

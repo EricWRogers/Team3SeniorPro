@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 
 public class InventorySlot_UI : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class InventorySlot_UI : MonoBehaviour
 
     public InventorySlot AssignedInvSlot => m_assignedInvSlot;
     public InventoryDisplay parentDisplay { get; private set; }
+
 
     void Awake()
     {
@@ -79,4 +81,6 @@ public class InventorySlot_UI : MonoBehaviour
     {
         parentDisplay?.SlotClicked(this);
     }
+
+
 }

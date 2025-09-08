@@ -113,9 +113,9 @@ public class PlayerWeapon : MonoBehaviour
         Destroy(bullet, 2f); // Destroy the bullet after 2 seconds to prevent memory leaks
     }
     
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawRay(raycastStart.position, raycastStart.forward * raycastRange);
-    }
+    }*/
 }

@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Asteroid
   - Bullet
+  - PassiveEnemy
   layers:
   - Default
   - TransparentFX

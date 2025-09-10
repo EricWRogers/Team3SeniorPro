@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46fafc67c12b8ed4aada747f5bb59ace, type: 3}
   m_Name: Bandage
   m_EditorClassIdentifier: 
-  outcome: {fileID: 0}
-  recipe: []
+  outcome: {fileID: 11400000, guid: 2660ace76e104d549ba0ed8025bcb5d1, type: 2}
+  recipe:
+  - {fileID: 11400000, guid: a318cc2f150ab9643b73ce43a4950f56, type: 2}
+  - {fileID: 11400000, guid: a318cc2f150ab9643b73ce43a4950f56, type: 2}
+  - {fileID: 11400000, guid: a318cc2f150ab9643b73ce43a4950f56, type: 2}
   amountOfOutcome: 0

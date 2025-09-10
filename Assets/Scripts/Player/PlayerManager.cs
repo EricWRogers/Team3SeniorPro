@@ -9,8 +9,8 @@ public class PlayerManager : MonoBehaviour
     public UnityEvent PlayerDeath;
 
     [Header("Health")]
-    [SerializeField] private float m_maxHealth = 100;
-    private float m_currentHealth;
+    [SerializeField] public float m_maxHealth = 100;
+    public float m_currentHealth;
     public float currentHealthPercentage => m_currentHealth / m_maxHealth;
 
 

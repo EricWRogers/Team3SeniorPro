@@ -59,12 +59,15 @@ public class BasicRangedAi : MonoBehaviour
     {
         if (projectilePrefab != null && firePoint != null)
         {
-            GameObject proj = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
             Vector3 direction = (target - firePoint.position).normalized;
+            Quaternion rot = Quaternion.LookRotation(direction);
+
+            GameObject proj = Instantiate(projectilePrefab, firePoint.position, rot);
+
             Rigidbody rb = proj.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.linearVelocity = direction * 15f; // Adjust projectile speed here
+                rb.linearVelocity = direction * 15f; // Adjust projectile speed
             }
         }
     }
